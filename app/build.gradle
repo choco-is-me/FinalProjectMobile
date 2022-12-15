@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.moh.moclock"
+        applicationId "com.moh.alarmclock"
         minSdkVersion 24
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
@@ -24,7 +24,7 @@ android {
     androidResources {
         noCompress 'tflite'
     }
-    namespace 'com.moh.moclock'
+    namespace 'com.moh.alarmclock'
 
 }
 
