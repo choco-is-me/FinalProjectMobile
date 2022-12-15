@@ -1,5 +1,6 @@
 package com.moh.alarmclock;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -23,16 +24,12 @@ public class TapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_tap);
         MoAlarmSessionBroadCast.activityList.add(this);
         init();
     }
 
+    @SuppressLint("SetTextI18n")
     private void init(){
-        this.counter = findViewById(R.id.tap_counter);
-        this.nextTest = findViewById(R.id.Another_test_btn);
-        this.layout = findViewById(R.id.tap_constrained_layout);
-
 
         this.counter.setText(this.counterValue+"");
 

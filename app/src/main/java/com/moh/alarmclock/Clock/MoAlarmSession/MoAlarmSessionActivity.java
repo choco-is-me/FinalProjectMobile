@@ -88,11 +88,8 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
         TextView title = findViewById(R.id.title_alarm);
         ImageView snoozeButton = findViewById(R.id.snooze_button);
-        ImageView stopButton = findViewById(R.id.stop_alarm);
         TextView snoozeText = findViewById(R.id.snooze_text);
-        TextView stopText = findViewById(R.id.stop_alarm_text);
 
-        stopText.setText(moInformation.getRightButton());
         snoozeText.setText(moInformation.getLeftButton());
         findViewById(R.id.text_clock);
         title.setText(moInformation.getTitle());
@@ -100,7 +97,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 
         if (!moInformation.isClock()) {
             snoozeButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_restore_24));
-            stopButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_timer_off_24));
         }
 
         snoozeButton.setOnLongClickListener((v) -> {
