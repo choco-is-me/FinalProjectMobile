@@ -112,6 +112,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/hour_timer_tv"
+                style="@style/StopWatchTimerStyle.Timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -123,7 +124,7 @@
                 android:nextFocusDown="@id/minute_timer_tv"
                 android:nextFocusForward="@id/minute_timer_tv"
                 android:selectAllOnFocus="true"
-                style="@style/StopWatchTimerStyle.Timer"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dot1"
@@ -135,6 +136,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/minute_timer_tv"
+                style="@style/StopWatchTimerStyle.Timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -147,7 +149,7 @@
                 android:nextFocusDown="@id/seconds_timer_tv"
                 android:nextFocusForward="@id/seconds_timer_tv"
                 android:selectAllOnFocus="true"
-                style="@style/StopWatchTimerStyle.Timer"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dot2"
@@ -159,13 +161,14 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/seconds_timer_tv"
+                style="@style/StopWatchTimerStyle.Timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
-                style="@style/StopWatchTimerStyle.Timer"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 

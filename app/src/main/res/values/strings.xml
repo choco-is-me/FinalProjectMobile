@@ -2,17 +2,6 @@
     <string name="app_name">3dyoms Shock</string>
     <string name="generic_alarm">Alarm</string>
 
-
-
-
-    <string name="tfe_od_app_name" translation_description="Object Detection demo app [CHAR_LIMIT=40]">TFL Detect</string>
-
-    <string name="tfe_od_camera_error" translation_description="Error regarding camera support[CHAR_LIMIT=40]">
-        This device doesn\'t support Camera2 API.</string>
-
-
-
-
     <string name="sub_title_object_detection">Point your camera to the object above to cancel the alarm</string>
     <string name="sub_title_tap_activity">Hold to cancel the alarm.</string>
 
@@ -53,12 +42,10 @@
     <string-array name="theme_version_entries">
         <item>Light</item>
         <item>Dark</item>
-        <item>Follow system</item>
     </string-array>
     <string-array name="theme_version_values">
         <item>0</item>
         <item>1</item>
-        <item>-1</item>
     </string-array>
 
     <string name="volume_button">volume_button_pref</string>
