@@ -2,7 +2,6 @@ package com.moh.alarmclock.Clock.MoAlarmSession;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
@@ -10,12 +9,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
 
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
@@ -31,17 +28,8 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     public static final String EXTRA_INFO = "emoinfo";
 
     private MoInformation moInformation;
-    private TextView title;
-    private TextView subTitle;
-    private TextClock textClock;
-    ConstraintLayout constraintLayout;
     MoInitAlarmSession.Type moType;
    // private GestureDetectorCompat detectorCompat;
-
-    private TextView snoozeText;
-    private TextView stopText;
-    private ImageView snoozeButton;
-    private ImageView stopButton;
 
     private boolean snoozed;
 
@@ -98,17 +86,16 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         }
 
 
-
-        this.title = findViewById(R.id.title_alarm);
-        this.snoozeButton = findViewById(R.id.snooze_button);
-        this.stopButton = findViewById(R.id.stop_alarm);
-        this.snoozeText = findViewById(R.id.snooze_text);
-        this.stopText = findViewById(R.id.stop_alarm_text);
+        TextView title = findViewById(R.id.title_alarm);
+        ImageView snoozeButton = findViewById(R.id.snooze_button);
+        ImageView stopButton = findViewById(R.id.stop_alarm);
+        TextView snoozeText = findViewById(R.id.snooze_text);
+        TextView stopText = findViewById(R.id.stop_alarm_text);
 
         stopText.setText(moInformation.getRightButton());
         snoozeText.setText(moInformation.getLeftButton());
-        this.textClock = findViewById(R.id.text_clock);
-        this.title.setText(moInformation.getTitle());
+        findViewById(R.id.text_clock);
+        title.setText(moInformation.getTitle());
         this.moType = moInformation.getType();
 
         if (!moInformation.isClock()) {
@@ -203,13 +190,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     public boolean onTouchEvent(MotionEvent event) {
 //        detectorCompat.onTouchEvent(event);
         return super.onTouchEvent(event);
-    }
-
-    private void startAnimation() {
-        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(4000);
-        animationDrawable.setExitFadeDuration(5000);
-        animationDrawable.start();
     }
 
 

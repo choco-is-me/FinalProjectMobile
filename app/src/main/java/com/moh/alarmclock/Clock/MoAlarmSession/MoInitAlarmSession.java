@@ -24,7 +24,7 @@ public class MoInitAlarmSession {
 
     public static void start(Context context,String title,String lb,String rb,Type type,int id){
 
-        MoInformation moInformation = new MoInformation(title,"subtitle",type,id);
+        MoInformation moInformation = new MoInformation(title, type,id);
         moInformation.setLeftButton(lb);
         moInformation.setRightButton(rb);
         list.add(moInformation);

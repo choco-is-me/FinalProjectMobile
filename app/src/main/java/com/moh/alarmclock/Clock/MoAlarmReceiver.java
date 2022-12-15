@@ -16,7 +16,7 @@ public class MoAlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        MoAlarmWakeLock.acquireCpuWakeLock(context,1000000);
+        MoAlarmWakeLock.acquireCpuWakeLock(context);
         int id = intent.getIntExtra(MoAlarmClockManager.SET_ID,-1);
         channelId = id + "kl";
         try {

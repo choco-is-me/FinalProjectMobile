@@ -8,7 +8,6 @@ public class MoInformation {
 
 
     private  String title;
-    private  String subTitle;
     private  String leftButton;
     private  String rightButton;
     private  MoInitAlarmSession.Type type;
@@ -17,15 +16,13 @@ public class MoInformation {
     private int id;
     private MoAlarmClock clock;
 
-    public MoInformation(String t,String s,MoInitAlarmSession.Type type){
+    public MoInformation(String t, MoInitAlarmSession.Type type){
         this.title = t;
-        this.subTitle = s;
         this.type = type;
     }
 
-    public MoInformation(String t,String s,MoInitAlarmSession.Type type,int i){
+    public MoInformation(String t, MoInitAlarmSession.Type type, int i){
         this.title = t;
-        this.subTitle = s;
         this.type = type;
         this.id = i;
         if(type == MoInitAlarmSession.Type.CLOCK){
@@ -58,14 +55,6 @@ public class MoInformation {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
     }
 
     public MoInitAlarmSession.Type getType() {

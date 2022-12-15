@@ -1,12 +1,12 @@
 package com.moh.alarmclock.Clock.MoAlarmSession;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
@@ -44,9 +44,7 @@ public class MoNotificationAlarmSession extends Service {
     public final static String STOP_ACTION = "Stop";
     public final static String SNOOZE_ACTION = "Snooze";
     public final static String OPEN_ACTION = "open";
-    public final static String NULL_ACTION = "null";
 
-    private final float AMOUNT_VOLUME = 0.02f;
     private final long DURATION_INCREASE = 20000;
     private final long INCREASE_EVERY = 3000;
 
@@ -70,18 +68,14 @@ public class MoNotificationAlarmSession extends Service {
         if (MoInitAlarmSession.list.isEmpty())
             return;
         moInformation = MoInitAlarmSession.list.remove();
-        int imp = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            // imp = NotificationManager.IMPORTANCE_HIGH;
-            imp = NotificationManager.IMPORTANCE_MAX;
-        } else {
-            imp = NotificationCompat.PRIORITY_HIGH;
-        }
+        int imp;
+        // imp = NotificationManager.IMPORTANCE_HIGH;
+        imp = NotificationManager.IMPORTANCE_MAX;
         MoNotificationChannel.createNotificationChannel(NAME, DESCRIPTION, this, CHANNEL_ID_ALARM, imp);
         // we need to assign a different id each time to show the
         // heads up notification (otherwise the system wouldn't do it)
         FORE_GROUND_SERVICE_ID = MoId.getRandomInt();
-        startForeground(FORE_GROUND_SERVICE_ID, notification(this, false));
+        startForeground(FORE_GROUND_SERVICE_ID, notification(this));
         super.onCreate();
     }
 
@@ -113,12 +107,12 @@ public class MoNotificationAlarmSession extends Service {
 
 
 
-    public Notification notification(Context context, boolean update) {
+    public Notification notification(Context context) {
         Intent fullScreenIntent = new Intent(context, MoAlarmSessionActivity.class);
         fullScreenIntent.putExtra(MoAlarmSessionActivity.EXTRA_INFO, CHANNEL_ID_ALARM);
         fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0,
+        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0,
                 fullScreenIntent, PendingIntent.FLAG_ONE_SHOT);
 
         playSound(context);
@@ -128,14 +122,10 @@ public class MoNotificationAlarmSession extends Service {
 
         NotificationCompat.Builder customNotification;
         int importance;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            importance = NotificationManager.IMPORTANCE_HIGH;
-        } else {
-            importance = NotificationCompat.PRIORITY_HIGH;
-        }
+        importance = NotificationManager.IMPORTANCE_HIGH;
 
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean addSnooze = moInformation.getClock().getSnooze().isActive();
+        PreferenceManager.getDefaultSharedPreferences(context);
+        moInformation.getClock().getSnooze().isActive();
 
         customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
                 .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
@@ -152,6 +142,7 @@ public class MoNotificationAlarmSession extends Service {
     }
 
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public static PendingIntent getAction(Context context, String action) {
         Intent pendingIntent = new Intent(context, MoAlarmSessionBroadCast.class);
         pendingIntent.setAction(action);

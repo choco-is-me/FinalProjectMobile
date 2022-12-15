@@ -1,5 +1,6 @@
 package com.moh.alarmclock.Clock.MoAlarmSession;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -41,7 +42,6 @@ public class MoNotificationTimerSession extends Service {
     public final static String STOP_ACTION_ID = "Stop2";
     public final static String RESET_ACTION = "Reset";
 
-    private final float AMOUNT_VOLUME = 0.01f;
     private final long DURATION_INCREASE = 22000;
     private final long INCREASE_EVERY = 2000;
     //10 minutes
@@ -75,12 +75,8 @@ public class MoNotificationTimerSession extends Service {
         if (MoInitAlarmSession.list.isEmpty())
             return;
         moInformation = MoInitAlarmSession.list.remove();
-        int imp = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            imp = NotificationManager.IMPORTANCE_HIGH;
-        }else{
-            imp = NotificationCompat.PRIORITY_HIGH;
-        }
+        int imp;
+        imp = NotificationManager.IMPORTANCE_HIGH;
         MoNotificationChannel.createNotificationChannel(NAME,DESCRIPTION,this,CHANNEL_ID_TIMER,imp);
         // we need to assign a different id each time to show the
         // heads up notification (otherwise the system wouldn't do it)
@@ -141,6 +137,7 @@ public class MoNotificationTimerSession extends Service {
     }
 
 
+    @SuppressLint("NotificationTrampoline")
     public Notification notification(Context context, boolean update){
 
 
@@ -155,7 +152,7 @@ public class MoNotificationTimerSession extends Service {
             Intent fullScreenIntent = new Intent(context, MoAlarmSessionActivity.class);
             fullScreenIntent.putExtra(MoAlarmSessionActivity.EXTRA_INFO,CHANNEL_ID_TIMER);
             fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0,
+            @SuppressLint("UnspecifiedImmutableFlag") PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(context, 0,
                     fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             String[] texts = MoTimeUtils.convertMilli(milliseconds);
@@ -170,12 +167,8 @@ public class MoNotificationTimerSession extends Service {
 
 
             int importance;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                importance = NotificationManager.IMPORTANCE_HIGH;
-                // importance = NotificationManager.IMPORTANCE_DEFAULT;
-            }else{
-                importance = NotificationCompat.PRIORITY_HIGH;
-            }
+            importance = NotificationManager.IMPORTANCE_HIGH;
+            // importance = NotificationManager.IMPORTANCE_DEFAULT;
 
             customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_TIMER)
                     .setSmallIcon(R.drawable.ic_hourglass_full_black_14dp)
@@ -215,12 +208,8 @@ public class MoNotificationTimerSession extends Service {
 
         Notification customNotification;
         int importance;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            importance = NotificationManager.IMPORTANCE_HIGH;
-           // importance = NotificationManager.IMPORTANCE_DEFAULT;
-        }else{
-            importance = NotificationCompat.PRIORITY_HIGH;
-        }
+        importance = NotificationManager.IMPORTANCE_HIGH;
+        // importance = NotificationManager.IMPORTANCE_DEFAULT;
 
 
         customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_TIMER)
@@ -245,6 +234,7 @@ public class MoNotificationTimerSession extends Service {
     }
 
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public static PendingIntent getAction(Context context, String action){
         Intent pendingIntent = new Intent(context, MoAlarmSessionBroadCast.class);
         pendingIntent.setAction(action);

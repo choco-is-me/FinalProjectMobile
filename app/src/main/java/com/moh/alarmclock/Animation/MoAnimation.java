@@ -35,7 +35,7 @@ public class MoAnimation {
     public static int MOVE_UP_FADE_OUT = R.anim.move_up_fade_out;
 
 
-    private static int ANIMATION_LIST[] = {
+    private static final int[] ANIMATION_LIST = {
             LEFT_TO_RIGHT,
             RIGHT_TO_LEFT,
             FADE_IN,
