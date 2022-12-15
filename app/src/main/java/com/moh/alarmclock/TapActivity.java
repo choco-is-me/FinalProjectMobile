@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.moh.alarmclock.Clock.MoAlarmSession.MoAlarmSessionBroadCast;
+import com.moh.alarmclock.Clock.AlarmSession.AlarmSessionBroadCast;
 
 public class TapActivity extends AppCompatActivity {
 
@@ -24,7 +24,7 @@ public class TapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MoAlarmSessionBroadCast.activityList.add(this);
+        AlarmSessionBroadCast.activityList.add(this);
         init();
     }
 

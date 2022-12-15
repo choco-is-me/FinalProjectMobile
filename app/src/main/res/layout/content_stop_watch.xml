@@ -8,13 +8,13 @@
 
     <include
         android:id="@+id/layout_stopWatch_timer"
+        layout="@layout/stop_watch_timer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        layout="@layout/stop_watch_timer"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cardRecycler_stopWatch_laps"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cardRecycler_stopWatch_laps"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/header_stopWatch_laps"

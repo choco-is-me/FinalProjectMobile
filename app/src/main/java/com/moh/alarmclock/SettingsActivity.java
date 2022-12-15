@@ -25,13 +25,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.loader.content.CursorLoader;
-import androidx.preference.Preference;
 
-import com.moh.alarmclock.Intents.MoIntents;
-import com.moh.alarmclock.Preference.MoPreference;
-import com.moh.alarmclock.Preference.MoPreferenceManager;
-import com.moh.alarmclock.SharedPref.MoSharedPref;
-import com.moh.alarmclock.Theme.MoTheme;
+import com.moh.alarmclock.Intents.Intents;
+import com.moh.alarmclock.Preference.Preference;
+import com.moh.alarmclock.Preference.PreferenceManager;
+import com.moh.alarmclock.SharedPref.SharedPref;
+import com.moh.alarmclock.Theme.Theme;
 import com.takisoft.preferencex.PreferenceFragmentCompat;
 
 import java.util.Objects;
@@ -158,12 +157,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor editor;
-        MoPreferenceManager preferenceManager;
-        MoPreference alarmSoundButton;
-        Preference clearAlarmSoundButton;
-        MoPreference timerSoundButton;
-        Preference clearTimerSoundButton;
-        Preference resetSettingsButton;
+        PreferenceManager preferenceManager;
+        Preference alarmSoundButton;
+        androidx.preference.Preference clearAlarmSoundButton;
+        Preference timerSoundButton;
+        androidx.preference.Preference clearTimerSoundButton;
+        androidx.preference.Preference resetSettingsButton;
         Activity a;
 
         public SettingsFragment(Activity a){
@@ -211,7 +210,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         private void initPrefManager(){
-            this.preferenceManager = new MoPreferenceManager()
+            this.preferenceManager = new PreferenceManager()
                     .add(this.alarmSoundButton)
                     .add(this.timerSoundButton);
         }
@@ -269,18 +268,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         private void initSetAlarmMusic() {
-            alarmSoundButton = new MoPreference(findPreference(a.getString(R.string.alarm_music))).setOnPreferenceClickListener(preference -> {
+            alarmSoundButton = new Preference(findPreference(a.getString(R.string.alarm_music))).setOnPreferenceClickListener(preference -> {
                 if(getReadExternalStoragePermission()){
-                    MoIntents.openMusicPicker(a,ALARM_MUSIC_CHANGE);
+                    Intents.openMusicPicker(a,ALARM_MUSIC_CHANGE);
                 }
                 return false;
             }).setNormalSummary(getString(R.string.alarm_music_summary)).setUpdateSummary(true);
         }
 
         private void initSetTimerMusic() {
-            timerSoundButton = new MoPreference(findPreference(a.getString(R.string.timer_music))).setOnPreferenceClickListener(preference -> {
+            timerSoundButton = new Preference(findPreference(a.getString(R.string.timer_music))).setOnPreferenceClickListener(preference -> {
                 if(getReadExternalStoragePermission()) {
-                    MoIntents.openMusicPicker(a, TIMER_MUSIC_CHANGE);
+                    Intents.openMusicPicker(a, TIMER_MUSIC_CHANGE);
                 }
                 return false;
             }).setNormalSummary(getString(R.string.timer_music_summary))
@@ -305,9 +304,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-            MoSharedPref.loadAll(a);
+            SharedPref.loadAll(a);
             if(s.equals(getString(R.string.theme_version))){
-                MoTheme.updateTheme(a);
+                Theme.updateTheme(a);
             }
             this.preferenceManager.update(sharedPreferences,s);
         }

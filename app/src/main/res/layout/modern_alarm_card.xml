@@ -19,20 +19,21 @@
 
         <TextView
             android:id="@+id/alarm_time_textView"
+            style="@style/AlarmClockStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/card_alarm_viewMargin"
-            android:layout_marginEnd="@dimen/card_alarm_viewMargin"
             android:layout_marginTop="@dimen/card_alarm_viewMargin"
+            android:layout_marginEnd="@dimen/card_alarm_viewMargin"
             android:text="20:14"
-            style="@style/AlarmClockStyle"
-            app:layout_constraintVertical_chainStyle="packed"
+            android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@id/linear_date_repeating"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <LinearLayout
             android:id="@+id/linear_date_repeating"
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#000000"
                 android:textSize="10sp"
                 android:textStyle="bold" />
 
@@ -60,8 +62,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
                 android:text="2019/03/02"
+                android:textColor="#000000"
                 android:textSize="12sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
@@ -69,17 +72,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-light"
             android:text="title_alarm"
-            app:layout_goneMarginBottom="16dp"
-            app:layout_constraintStart_toStartOf="@id/alarm_time_textView"
-            app:layout_constraintEnd_toEndOf="@id/alarm_time_textView"
-            app:layout_constraintTop_toBottomOf="@id/linear_date_repeating"
+            android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@id/is_active_switch"
+            app:layout_constraintEnd_toEndOf="@id/alarm_time_textView"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.0"/>
+            app:layout_constraintStart_toStartOf="@id/alarm_time_textView"
+            app:layout_constraintTop_toBottomOf="@id/linear_date_repeating"
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_goneMarginBottom="16dp" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/is_active_switch"

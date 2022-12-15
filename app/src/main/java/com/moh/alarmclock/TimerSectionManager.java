@@ -21,15 +21,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.moh.alarmclock.Animation.MoAnimation;
-import com.moh.alarmclock.Clock.MoTimer.MoTimer;
-import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoPresetRecyclerAdapter;
-import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
-import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoTimerPresetManager;
-import com.moh.alarmclock.Date.MoTimeUtils;
-import com.moh.alarmclock.Runnable.MoRunnable;
-import com.moh.alarmclock.Section.MoSectionManager;
-import com.moh.alarmclock.UI.MoTextInput;
+import com.moh.alarmclock.Animation.Animation;
+import com.moh.alarmclock.Clock.Timer.Timer;
+import com.moh.alarmclock.Clock.Timer.TimerPresetPackage.PresetRecyclerAdapter;
+import com.moh.alarmclock.Clock.Timer.TimerPresetPackage.TimerPreset;
+import com.moh.alarmclock.Clock.Timer.TimerPresetPackage.TimerPresetManager;
+import com.moh.alarmclock.Date.TimeUtils;
+import com.moh.alarmclock.Runnable.Runnable;
+import com.moh.alarmclock.Section.SectionManager;
+import com.moh.alarmclock.UI.TextInput;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 public class TimerSectionManager implements MainActivity.SelectModeInterface {
@@ -111,9 +111,9 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         this.secondTimer = mainActivity.findViewById(R.id.seconds_timer_tv);
 
 
-        this.hourTimer.setOnFocusChangeListener(MoTextInput.twoDigitFocusChangeListener());
-        this.minuteTimer.setOnFocusChangeListener(MoTextInput.twoDigitFocusChangeListener());
-        this.secondTimer.setOnFocusChangeListener(MoTextInput.twoDigitFocusChangeListener());
+        this.hourTimer.setOnFocusChangeListener(TextInput.twoDigitFocusChangeListener());
+        this.minuteTimer.setOnFocusChangeListener(TextInput.twoDigitFocusChangeListener());
+        this.secondTimer.setOnFocusChangeListener(TextInput.twoDigitFocusChangeListener());
 
 
         this.cancelTimer = mainActivity.findViewById(R.id.cancel_time_timer_button);
@@ -124,17 +124,17 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         this.progressBar = mainActivity.findViewById(R.id.barTimer);
 
         this.pauseTimer.setOnClickListener((v) -> {
-            if(MoTimer.universalTimer != null && MoTimer.universalTimer.isCreated()) {
-                MoTimer.universalTimer.pause(false);
-                updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
+            if(Timer.universalTimer != null && Timer.universalTimer.isCreated()) {
+                Timer.universalTimer.pause(false);
+                updatePauseButton(this.pauseTimer, Timer.universalTimer.getPauseButtonText());
 
             }
         });
 
         this.cancelTimer.setBackgroundColor(mainActivity.getColor(R.color.error_color));
         this.cancelTimer.setOnClickListener((v) -> {
-            if(MoTimer.universalTimer.isCreated()){
-                MoTimer.universalTimer.cancel(mainActivity);
+            if(Timer.universalTimer.isCreated()){
+                Timer.universalTimer.cancel(mainActivity);
                 changeButtonLayout(true, false, false);
             }
         });
@@ -142,7 +142,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         this.startTimer.setOnClickListener(this::startTimer);
 
 
-        MoTimerPresetManager.load("",mainActivity);
+        TimerPresetManager.load("",mainActivity);
         initRecyclerView();
 
 
@@ -158,7 +158,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         this.linearDeleteMode = mainActivity.findViewById(R.id.delete_mode_preset);
         this.delete = mainActivity.findViewById(R.id.delete_preset_button);
         this.delete.setOnClickListener(view -> {
-            MoTimerPresetManager.deleteSelected(mainActivity);
+            TimerPresetManager.deleteSelected(mainActivity);
             cancelDeleteAlarmMode();
         });
         this.timer_text_linear_layout = mainActivity.findViewById(R.id.timer_text_linear_layout);
@@ -168,13 +168,13 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         turnDelete(false);
 
 
-        MoSectionManager.getInstance().subscribe(value -> MoTimer.universalTimer.setUpdateTextViews(value == MoSectionManager.TIMER_SECTION));
+        SectionManager.getInstance().subscribe(value -> Timer.universalTimer.setUpdateTextViews(value == SectionManager.TIMER_SECTION));
 
     }
 
     private void updatePauseButton(TextView pauseTimer, String pauseButtonText) {
         pauseTimer.setText(pauseButtonText);
-        this.pauseTimer.setBackgroundColor(MoTimer.universalTimer.showingResume()?
+        this.pauseTimer.setBackgroundColor(Timer.universalTimer.showingResume()?
                 mainActivity.getColor(R.color.colorPrimary):mainActivity.getColor(R.color.colorPrimary));
     }
 
@@ -183,12 +183,12 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(mainActivity, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MoPresetRecyclerAdapter(MoTimerPresetManager.getPresets(), mainActivity, new MoRunnable() {
+        mAdapter = new PresetRecyclerAdapter(TimerPresetManager.getPresets(), mainActivity, new Runnable() {
             @Override
             public <T> void run(T... args) {
                 setTextsMilli((Long) args[0]);
             }
-        }, () -> showDeleteMode(true), new MoRunnable() {
+        }, () -> showDeleteMode(true), new Runnable() {
             @Override
             public <T> void run(T... args) {
                 onSizeOfSelectedChanged((Integer) args[0]);
@@ -207,10 +207,10 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         String minute = this.minuteTimer.getText().toString();
         String second = this.secondTimer.getText().toString();
         if(hour.isEmpty() && minute.isEmpty() && second.isEmpty()){
-            return MoTimeUtils.getTimeInMilli(hourTimer.getHint().toString(),
+            return TimeUtils.getTimeInMilli(hourTimer.getHint().toString(),
                     minuteTimer.getHint().toString(),secondTimer.getHint().toString());
         }
-        return MoTimeUtils.getTimeInMilli(hour,minute,second);
+        return TimeUtils.getTimeInMilli(hour,minute,second);
     }
 
     private void showErrorInput(){
@@ -221,8 +221,8 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
     }
 
     private void setTextsMilli(long milli){
-        if(!MoTimer.universalTimer.isCreated()){
-            String[] parts = MoTimeUtils.convertMilli(milli);
+        if(!Timer.universalTimer.isCreated()){
+            String[] parts = TimeUtils.convertMilli(milli);
             this.hourTimer.setText(parts[0]);
             this.minuteTimer.setText(parts[1]);
             this.secondTimer.setText(parts[2]);
@@ -236,7 +236,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
             showErrorInput();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-            builder.setTitle("Timer Preset (" + MoTimeUtils.convertToReadableFormat(milliSeconds) + ")");
+            builder.setTitle("Timer Preset (" + TimeUtils.convertToReadableFormat(milliSeconds) + ")");
             builder.setMessage("Set a name to add this timer as a preset");
 
             View dialogView = MoInflaterView.inflate(R.layout.alert_dialog_timer_preset, mainActivity);
@@ -255,7 +255,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
                         input.setError("Please enter a name to save this preset");
                         return;
                     }
-                    MoTimerPresetManager.add(new MoTimerPreset(input.getText().toString(),milliSeconds),mainActivity);
+                    TimerPresetManager.add(new TimerPreset(input.getText().toString(),milliSeconds),mainActivity);
                     mAdapter.notifyDataSetChanged();
                     //Dismiss once everything is OK.
                     alertDialog.dismiss();
@@ -273,9 +273,9 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
             showErrorInput();
         } else {
             // startService the timer
-            if(MoTimer.universalTimer == null || !MoTimer.universalTimer.isCreated()){
+            if(Timer.universalTimer == null || !Timer.universalTimer.isCreated()){
                 hideKeyboardFrom(mainActivity,v);
-                MoTimer.universalTimer = new MoTimer(new MoRunnable() {
+                Timer.universalTimer = new Timer(new Runnable() {
                     @Override
                     public <T> void run(T... args) {
                         changeButtonLayout((Boolean) args[0],(Boolean) args[1],(Boolean) args[2]);
@@ -285,8 +285,8 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
                         this.progressBar,
                         new Button[]{this.startTimer, this.cancelTimer, this.pauseTimer},
                         this.hourTimer, this.minuteTimer, this.secondTimer);
-                MoTimer.universalTimer.startTimer();
-                updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
+                Timer.universalTimer.startTimer();
+                updatePauseButton(this.pauseTimer, Timer.universalTimer.getPauseButtonText());
                 changeButtonLayout(false, true, true);
             }
 
@@ -305,31 +305,31 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
     private void changeButtonLayout(boolean start, boolean pause, boolean cancel) {
         showRecyclerPreset(start);
         showAddPreset(start);
-        MoAnimation.animateNoTag(startTimer,start ? View.VISIBLE : View.GONE,start?MoAnimation.APPEAR:MoAnimation.DISAPPEAR);
-        MoAnimation.animateNoTag(cancelTimer,cancel ? View.VISIBLE : View.GONE,cancel?MoAnimation.APPEAR:MoAnimation.DISAPPEAR);
-        MoAnimation.animateNoTag(pauseTimer,pause ? View.VISIBLE : View.GONE,pause?MoAnimation.APPEAR:MoAnimation.DISAPPEAR);
+        Animation.animateNoTag(startTimer,start ? View.VISIBLE : View.GONE,start? Animation.APPEAR: Animation.DISAPPEAR);
+        Animation.animateNoTag(cancelTimer,cancel ? View.VISIBLE : View.GONE,cancel? Animation.APPEAR: Animation.DISAPPEAR);
+        Animation.animateNoTag(pauseTimer,pause ? View.VISIBLE : View.GONE,pause? Animation.APPEAR: Animation.DISAPPEAR);
     }
 
     void closeTimerService() {
-        if(MoTimerPreset.isInDeleteMode)
+        if(TimerPreset.isInDeleteMode)
             return;
 
-        MoTimer.universalTimer.setTimerTextInputs(this.hourTimer, this.minuteTimer, this.secondTimer);
-        MoTimer.universalTimer.setProgressBar(this.progressBar);
-        MoTimer.universalTimer.setButtons(this.startTimer, this.cancelTimer, this.pauseTimer);
-        MoTimer.universalTimer.cancel(mainActivity, true, true);
+        Timer.universalTimer.setTimerTextInputs(this.hourTimer, this.minuteTimer, this.secondTimer);
+        Timer.universalTimer.setProgressBar(this.progressBar);
+        Timer.universalTimer.setButtons(this.startTimer, this.cancelTimer, this.pauseTimer);
+        Timer.universalTimer.cancel(mainActivity, true, true);
         /**
          * ui changes
          */
-        if (MoTimer.universalTimer.isCreated()) {
+        if (Timer.universalTimer.isCreated()) {
             //mainActivity.changeLayout(false, false, true, true);
             changeButtonLayout(false, true, true);
 
-            updatePauseButton(this.pauseTimer, MoTimer.universalTimer.getPauseButtonText());
+            updatePauseButton(this.pauseTimer, Timer.universalTimer.getPauseButtonText());
         }else {
-            MoTimer.universalTimer.update();
+            Timer.universalTimer.update();
            // changeButtonLayout(true, false, false);
-            //this.pauseTimer.setText(MoTimer.universalTimer.getPauseButtonText());
+            //this.pauseTimer.setText(Timer.universalTimer.getPauseButtonText());
         }
     }
 
@@ -353,10 +353,10 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
     }
 
     private void showDeleteMode(boolean b){
-        MoTimerPreset.isInDeleteMode = b;
+        TimerPreset.isInDeleteMode = b;
 
         if(!b)
-            MoAnimation.clearLog();
+            Animation.clearLog();
 
         showLinearDelete(b);
         showNavigation(!b);
@@ -368,46 +368,46 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
 
         if(!b){
             // reset all the presets
-            MoTimerPresetManager.selectAllPresets(false);
+            TimerPresetManager.selectAllPresets(false);
         }
 
         if(!b)
-            MoAnimation.clearLog();
+            Animation.clearLog();
     }
 
     private void showLinearDelete(boolean b){
-        MoAnimation.animate(this.linearDeleteMode,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.BOTTOM_TO_TOP_FADE_IN:MoAnimation.MOVE_DOWN_FADE_OUT);
+        Animation.animate(this.linearDeleteMode,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.BOTTOM_TO_TOP_FADE_IN: Animation.MOVE_DOWN_FADE_OUT);
     }
 
     private void showNavigation(boolean b){
-        MoAnimation.animate(this.bottomNavigation,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.BOTTOM_TO_TOP_FADE_IN:MoAnimation.MOVE_DOWN_FADE_OUT);
+        Animation.animate(this.bottomNavigation,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.BOTTOM_TO_TOP_FADE_IN: Animation.MOVE_DOWN_FADE_OUT);
     }
 
     private void showStartButton(boolean b){
-        MoAnimation.animate(this.startTimer,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.FADE_IN:MoAnimation.FADE_OUT);
+        Animation.animate(this.startTimer,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.FADE_IN: Animation.FADE_OUT);
     }
 
     private void showTimerText(boolean b){
-        MoAnimation.animate(this.timer_text_linear_layout,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.FADE_IN:MoAnimation.FADE_OUT);
+        Animation.animate(this.timer_text_linear_layout,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.FADE_IN: Animation.FADE_OUT);
     }
 
     private void showRecyclerPreset(boolean b){
-        MoAnimation.animateNoTag(this.recyclerView,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.FADE_IN:MoAnimation.FADE_OUT);
+        Animation.animateNoTag(this.recyclerView,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.FADE_IN: Animation.FADE_OUT);
     }
 
     private void showCounter(boolean b){
-        MoAnimation.animateNoTag(this.counterPreset,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.FADE_IN:MoAnimation.FADE_OUT);
+        Animation.animateNoTag(this.counterPreset,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.FADE_IN: Animation.FADE_OUT);
     }
 
     private void showAddPreset(boolean b){
-        MoAnimation.animateNoTag(this.addPresetButton,b?View.VISIBLE:View.INVISIBLE,
-                b?MoAnimation.APPEAR:MoAnimation.DISAPPEAR);
+        Animation.animateNoTag(this.addPresetButton,b?View.VISIBLE:View.INVISIBLE,
+                b? Animation.APPEAR: Animation.DISAPPEAR);
     }
 
     private void turnDelete(boolean on) {
@@ -417,7 +417,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
 
 
     public void onWindowFocusChanged(){
-        if(MoTimerPreset.isInDeleteMode){
+        if(TimerPreset.isInDeleteMode){
             showDeleteMode(true);
             mAdapter.notifyDataSetChanged();
         }
@@ -441,6 +441,6 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
 
     @Override
     public boolean isSelecting() {
-        return MoTimerPreset.isInDeleteMode;
+        return TimerPreset.isInDeleteMode;
     }
 }

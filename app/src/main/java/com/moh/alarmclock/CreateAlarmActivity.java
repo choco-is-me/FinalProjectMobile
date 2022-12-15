@@ -19,13 +19,13 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
-import com.moh.alarmclock.Clock.MoAlarmClock;
-import com.moh.alarmclock.Clock.MoAlarmClockManager;
-import com.moh.alarmclock.Clock.MoRepeating;
-import com.moh.alarmclock.Clock.MoSnooze.MoSnooze;
-import com.moh.alarmclock.Date.MoDate;
-import com.moh.alarmclock.MoVibration.MoVibration;
-import com.moh.alarmclock.MoVibration.MoVibrationTypes;
+import com.moh.alarmclock.Clock.AlarmClock;
+import com.moh.alarmclock.Clock.AlarmClockManager;
+import com.moh.alarmclock.Clock.Repeating;
+import com.moh.alarmclock.Clock.Snooze.Snooze;
+import com.moh.alarmclock.Date.Date;
+import com.moh.alarmclock.MoVibration.Vibration;
+import com.moh.alarmclock.MoVibration.VibrationTypes;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,7 +36,7 @@ public class CreateAlarmActivity extends AppCompatActivity {
 
     // this is for when the user is trying to edit the clock
     // this is what changed
-    public static MoAlarmClock clock;
+    public static AlarmClock clock;
 
 
     TimePicker timePicker;
@@ -117,9 +117,9 @@ public class CreateAlarmActivity extends AppCompatActivity {
             // then show the days
             if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
                 //List<String> texts = getTextChips();
-                updateDateTextView(MoRepeating.readableFormat(this.getPositionChips()));
+                updateDateTextView(Repeating.readableFormat(this.getPositionChips()));
             } else {
-                updateDateTextView(MoDate.getReadableDate(this.myCalendar));
+                updateDateTextView(Date.getReadableDate(this.myCalendar));
             }
             // then this alarm is already created just change things
             // change the interface
@@ -152,9 +152,9 @@ public class CreateAlarmActivity extends AppCompatActivity {
         CompoundButton.OnCheckedChangeListener listener = (compoundButton, b) -> {
             if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
                 //List<String> texts = getTextChips();
-                updateDateTextView(MoRepeating.readableFormat(this.getPositionChips()));
+                updateDateTextView(Repeating.readableFormat(this.getPositionChips()));
             } else {
-                updateDateTextView(MoDate.getReadableDate(this.myCalendar));
+                updateDateTextView(Date.getReadableDate(this.myCalendar));
             }
 
 
@@ -250,7 +250,7 @@ public class CreateAlarmActivity extends AppCompatActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            this.updateDateTextView(MoDate.getReadableDate(this.myCalendar));
+            this.updateDateTextView(Date.getReadableDate(this.myCalendar));
             this.weekdaysChip.clearCheck();
         };
         DatePickerDialog dialog = new DatePickerDialog(this, date, myCalendar
@@ -284,31 +284,31 @@ public class CreateAlarmActivity extends AppCompatActivity {
 
     private void save() {
         this.setUpTime();
-        MoAlarmClock c;
+        AlarmClock c;
         if (isEditMode()) {
             c = clock;
             // this alarm already has an id
         } else {
-            c = new MoAlarmClock();
+            c = new AlarmClock();
             // setting an id for this which is unique
-            c.setId(MoAlarmClockManager.getInstance().getNextId());
+            c.setId(AlarmClockManager.getInstance().getNextId());
         }
         c.setTitle(this.alarmName.getText().toString());
         c.setDateTime(this.myCalendar);
         c.setActive(true);
-        c.setSnooze(new MoSnooze(this, this.snooze.isChecked()));
-        c.setVibration(new MoVibration(MoVibrationTypes.BASIC, this.vibration.isChecked()));
+        c.setSnooze(new Snooze(this, this.snooze.isChecked()));
+        c.setVibration(new Vibration(VibrationTypes.BASIC, this.vibration.isChecked()));
         c.setPathToMusic(this.music.isChecked());
-        c.setRepeating(new MoRepeating(this.getPositionChips()));
+        c.setRepeating(new Repeating(this.getPositionChips()));
         if (isEditMode()) {
             c.setActive(true);
             // just update/save the changes also activate since this might be earlier than others
-            MoAlarmClockManager.getInstance().saveActivate(this);
+            AlarmClockManager.getInstance().saveActivate(this);
             Toast.makeText(this, "Alarm changed to " +
                     c.getDate().getReadableDifference(Calendar.getInstance()), Toast.LENGTH_LONG).show();
         } else {
             // add alarm if not editing
-            MoAlarmClockManager.getInstance().addAlarm(c, this);
+            AlarmClockManager.getInstance().addAlarm(c, this);
         }
 
         finish();

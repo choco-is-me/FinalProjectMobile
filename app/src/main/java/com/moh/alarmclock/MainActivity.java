@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.moh.alarmclock.Animation.MoAnimation;
-import com.moh.alarmclock.Clock.MoAlarmClockManager;
-import com.moh.alarmclock.Clock.MoStopWatch.MoStopWatch;
-import com.moh.alarmclock.Clock.MoTimer.MoTimer;
-import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoTimerPreset;
-import com.moh.alarmclock.Section.MoSectionManager;
-import com.moh.alarmclock.SharedPref.MoSharedPref;
-import com.moh.alarmclock.Theme.MoTheme;
+import com.moh.alarmclock.Animation.Animation;
+import com.moh.alarmclock.Clock.AlarmClockManager;
+import com.moh.alarmclock.Clock.MoStopWatch.StopWatch;
+import com.moh.alarmclock.Clock.Timer.Timer;
+import com.moh.alarmclock.Clock.Timer.TimerPresetPackage.TimerPreset;
+import com.moh.alarmclock.Section.SectionManager;
+import com.moh.alarmclock.SharedPref.SharedPref;
+import com.moh.alarmclock.Theme.Theme;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
-        MoSharedPref.loadAll(this);
-        MoAnimation.initAllAnimations(this);
+        SharedPref.loadAll(this);
+        Animation.initAllAnimations(this);
         this.timerSectionManager.timer_liner_layout = findViewById(R.id.linear_timer_layout);
         this.bottomDeleteBar = findViewById(R.id.delete_mode_preset);
         this.timerSectionManager.initTimerSection();
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         this.initAlarmSection();
         timerSectionManager.closeTimerService();
         // adding all the animations to a sparse array
-        MoTheme.updateTheme(this);
+        Theme.updateTheme(this);
     }
 
 
@@ -76,15 +76,15 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.Alarm_Section:
                     changeLayout(true, false, false, false, false);
-                    MoSectionManager.getInstance().setSection(MoSectionManager.ALARM_SECTION);
+                    SectionManager.getInstance().setSection(SectionManager.ALARM_SECTION);
                     return true;
                 case R.id.StopWatch_Section:
                     changeLayout(false, true, false, false, false);
-                    MoSectionManager.getInstance().setSection(MoSectionManager.STOP_WATCH_SECTION);
+                    SectionManager.getInstance().setSection(SectionManager.STOP_WATCH_SECTION);
                     return true;
                 case R.id.Timer_Section:
                     changeLayout(false, false, true, false, false);
-                    MoSectionManager.getInstance().setSection(MoSectionManager.TIMER_SECTION);
+                    SectionManager.getInstance().setSection(SectionManager.TIMER_SECTION);
                     return true;
                 default:
                     return false;
@@ -93,17 +93,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchSection() {
-        switch (MoSectionManager.getInstance().getSection()) {
-            case MoSectionManager.ALARM_SECTION:
+        switch (SectionManager.getInstance().getSection()) {
+            case SectionManager.ALARM_SECTION:
                 changeLayout(true, false, false, false, true);
                 break;
-            case MoSectionManager.STOP_WATCH_SECTION:
+            case SectionManager.STOP_WATCH_SECTION:
                 changeLayout(false, true, false, false, true);
                 break;
-            case MoSectionManager.TIMER_SECTION:
+            case SectionManager.TIMER_SECTION:
                 changeLayout(false, false, true, false, true);
                 break;
-            case MoSectionManager.WORLD_CLOCK_SECTION:
+            case SectionManager.WORLD_CLOCK_SECTION:
                 changeLayout(false, false, false, true, true);
                 break;
         }
@@ -144,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
         boolean timerPresetIsSelecting = timerSectionManager.isSelecting();
 
         if (alarmIsSelecting) {
-            MoSectionManager.getInstance().setSection(MoSectionManager.ALARM_SECTION);
+            SectionManager.getInstance().setSection(SectionManager.ALARM_SECTION);
         } else if (timerPresetIsSelecting) {
-            MoSectionManager.getInstance().setSection(MoSectionManager.TIMER_SECTION);
+            SectionManager.getInstance().setSection(SectionManager.TIMER_SECTION);
         }
         switchSection();
     }
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (alarmSectionManager.onBackPressed()) {
            // we have consumed the back press there, so we can ignore it here
-        } else if (MoTimerPreset.isInDeleteMode) {
+        } else if (TimerPreset.isInDeleteMode) {
             timerSectionManager.cancelDeleteAlarmMode();
         }else {
             super.onBackPressed();
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MoAlarmClockManager.getInstance().onDestroy();
+        AlarmClockManager.getInstance().onDestroy();
     }
 
     /**
@@ -186,13 +186,13 @@ public class MainActivity extends AppCompatActivity {
         timerSectionManager.onWindowFocusChanged();
         super.onWindowFocusChanged(hasFocus);
         if (!hasFocus) {
-            MoTimer.universalTimer.startService(this);
-            MoStopWatch.universal.startNotificationService(this);
+            Timer.universalTimer.startService(this);
+            StopWatch.universal.startNotificationService(this);
             changeIsInApp(false);
         } else {
             alarmSectionManager.updateSubTitle();
             timerSectionManager.closeTimerService();
-            MoStopWatch.universal.cancelNotificationService(this);
+            StopWatch.universal.cancelNotificationService(this);
             stopWatchManager.update();
             changeIsInApp(true);
         }

@@ -1,0 +1,53 @@
+package com.moh.alarmclock.Clock;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+import com.moh.alarmclock.Clock.AlarmSession.AlarmWakeLock;
+import com.moh.alarmclock.Clock.AlarmSession.InitAlarmSession;
+
+
+public class AlarmReceiver extends BroadcastReceiver {
+
+    String channelId = "";
+
+    private static final String CHANNEL_ID = "CHANNEL_ID";
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        AlarmWakeLock.acquireCpuWakeLock(context);
+        int id = intent.getIntExtra(AlarmClockManager.SET_ID,-1);
+        channelId = id + "kl";
+        try {
+            AlarmClockManager.getInstance().cancelAlarm(id,context);
+        } catch (EmptyAlarmException e) {
+            // we don't want it to ring if there is no alarm with such id
+            // make notification
+            return;
+        }
+
+        //AlarmWakeLock.acquireCpuWakeLock(context,1000000);
+        // activate the alarm (ring service)
+        try {
+            InitAlarmSession.startAlarm(context,id);
+        } catch (EmptyAlarmException e) {
+            //e.printStackTrace();
+        }
+
+//        createNotificationChannel(context);
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+//                .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
+//                .setContentTitle("missed alarm")
+//                .setContentText("alarm rang but there was no matching id (so it did not give you sound)")
+//                .setStyle(new NotificationCompat.BigTextStyle()
+//                        .bigText("Much longer text that cannot fit one line..."))
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+//
+//        // notificationId is a unique int for each notification that you must define
+//        notificationManager.notify(12, builder.build());
+
+    }
+
+}

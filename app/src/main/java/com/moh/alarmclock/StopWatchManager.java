@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.moh.alarmclock.Clock.MoStopWatch.MoStopWatch;
-import com.moh.alarmclock.Clock.MoStopWatch.MoStopWatchRecyclerAdapter;
-import com.moh.alarmclock.Section.MoSectionManager;
+import com.moh.alarmclock.Clock.MoStopWatch.StopWatch;
+import com.moh.alarmclock.Clock.MoStopWatch.StopWatchRecyclerAdapter;
+import com.moh.alarmclock.Section.SectionManager;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
@@ -25,7 +25,7 @@ public class StopWatchManager {
     private Button lap;
     private MoCardRecyclerView cardRecyclerView;
     private MoRecyclerView recyclerView;
-    private MoStopWatchRecyclerAdapter adapter;
+    private StopWatchRecyclerAdapter adapter;
     private View headerLaps;
     View root;
 
@@ -51,41 +51,41 @@ public class StopWatchManager {
 
 
         this.start.setOnClickListener(view -> {
-            MoStopWatch.universal.start();
-            this.stop.setText(MoStopWatch.universal.getStopString());
-            this.lap.setText(MoStopWatch.universal.getLapString());
-            this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
+            StopWatch.universal.start();
+            this.stop.setText(StopWatch.universal.getStopString());
+            this.lap.setText(StopWatch.universal.getLapString());
+            this.stop.setBackgroundColor(StopWatch.universal.getStopColor());
         });
         this.stop.setBackgroundColor(activity.getColor(R.color.error_color));
         this.stop.setOnClickListener(view -> {
-            MoStopWatch.universal.stop();
-            this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
-            this.stop.setText(MoStopWatch.universal.getStopString());
-            this.lap.setText(MoStopWatch.universal.getLapString());
+            StopWatch.universal.stop();
+            this.stop.setBackgroundColor(StopWatch.universal.getStopColor());
+            this.stop.setText(StopWatch.universal.getStopString());
+            this.lap.setText(StopWatch.universal.getLapString());
         });
         this.lap.setOnClickListener(view -> {
-            MoStopWatch.universal.lap();
+            StopWatch.universal.lap();
             updateRecyclerView();
-            this.lap.setText(MoStopWatch.universal.getLapString());
-            this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
+            this.lap.setText(StopWatch.universal.getLapString());
+            this.stop.setBackgroundColor(StopWatch.universal.getStopColor());
         });
-        MoStopWatch.universal.setActivity(activity);
-        MoStopWatch.universal.setStopWatchTv(this.minute, this.second, this.milliSecond);
-        MoStopWatch.universal.setButtons(this.start, this.stop, this.lap);
-        MoStopWatch.universal.changeButtonText();
+        StopWatch.universal.setActivity(activity);
+        StopWatch.universal.setStopWatchTv(this.minute, this.second, this.milliSecond);
+        StopWatch.universal.setButtons(this.start, this.stop, this.lap);
+        StopWatch.universal.changeButtonText();
 
 
 
         cardRecyclerView = root.findViewById(R.id.cardRecycler_stopWatch_laps);
-        adapter = new MoStopWatchRecyclerAdapter(this.activity, MoStopWatch.universal.getLaps());
+        adapter = new StopWatchRecyclerAdapter(this.activity, StopWatch.universal.getLaps());
         recyclerView = MoRecyclerUtils.get(cardRecyclerView.getRecyclerView(), adapter)
                 .setReverseLayout(true)
                 .show();
 
 
-        MoSectionManager.getInstance().subscribe((v) -> {
+        SectionManager.getInstance().subscribe((v) -> {
             // do not update the text views anymore since we are not on the page
-            MoStopWatch.universal.setUpdateTextViews(v == MoSectionManager.STOP_WATCH_SECTION);
+            StopWatch.universal.setUpdateTextViews(v == SectionManager.STOP_WATCH_SECTION);
         });
 
     }
@@ -93,7 +93,7 @@ public class StopWatchManager {
     public void updateRecyclerView() {
         activity.runOnUiThread(() -> {
             adapter.notifyDataSetChanged();
-            recyclerView.scrollToPosition(MoStopWatch.universal.getLapsCount() - 1);
+            recyclerView.scrollToPosition(StopWatch.universal.getLapsCount() - 1);
         });
         toggleRecyclerView();
     }
@@ -109,7 +109,7 @@ public class StopWatchManager {
     }
 
     public void update() {
-        this.stop.setBackgroundColor(MoStopWatch.universal.getStopColor());
+        this.stop.setBackgroundColor(StopWatch.universal.getStopColor());
         updateRecyclerView();
     }
 }

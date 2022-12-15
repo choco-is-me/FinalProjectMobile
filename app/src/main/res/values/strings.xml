@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">3dyoms</string>
+    <string name="app_name">3dyoms Shock</string>
     <string name="generic_alarm">Alarm</string>
 
 
@@ -14,7 +14,7 @@
 
 
     <string name="sub_title_object_detection">Point your camera to the object above to cancel the alarm</string>
-    <string name="sub_title_tap_activity">Tap your finger on screen enough times to cancel the alarm.</string>
+    <string name="sub_title_tap_activity">Hold to cancel the alarm.</string>
 
     <string name="cancel">Cancel</string>
     <string name="next_test">Next Test</string>
@@ -26,13 +26,11 @@
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="lap">Lap</string>
-    <string name="generic_colon">:</string>
-    <string name="generic_dot">.</string>
+    <string name="basic_colon">:</string>
+    <string name="basic_dot">.</string>
 
     <string name="add_alarm">add alarm</string>
     <string name="new_alarm">New Alarm</string>
-    <string name="add_city">add city</string>
-    <string name="search_city_name">Search a city…</string>
 
     <string name="all">Select all</string>
 
@@ -40,26 +38,18 @@
     <string name="about">About</string>
     <string name="title_activity_mo_settings">Settings</string>
 
-    <string name="empty_alarms_hint">You currently have no alarms. Press Add Alarm to make a new alarm.</string>
-    <string name="empty_world_clock_hint">You currently have no cities added. Press Add City to add a new time zone.</string>
-
+    <string name="empty_alarms">You currently have no alarms. Tap "Add Alarm" to create a new alarm.</string>
     <string name="error_already_added">You have already added this item.</string>
 
-    <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
     <string name="reply_title">Default reply action</string>
 
-
-
-    <!--changing the theme-->
     <string name="theme_version">theme_version_pref</string>
     <string name="theme_version_title">Theme</string>
-    <string name="theme_version_summary">Change the theme of this app by choosing between dark,
-        light, or follow the system options</string>
+    <string name="theme_version_summary">Change the theme of this app by choosing between dark and light.</string>
     <string-array name="theme_version_entries">
         <item>Light</item>
         <item>Dark</item>

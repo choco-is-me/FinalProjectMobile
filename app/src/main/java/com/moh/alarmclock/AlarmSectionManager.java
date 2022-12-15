@@ -14,12 +14,12 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.moh.alarmclock.Clock.MoAlarmClock;
-import com.moh.alarmclock.Clock.MoAlarmClockManager;
-import com.moh.alarmclock.Clock.MoAlarmClockRecyclerAdapter;
-import com.moh.alarmclock.Clock.MoClockSugestions.MoClockSuggestionManager;
-import com.moh.alarmclock.Clock.MoClockSugestions.MoPrioritySuggestion;
-import com.moh.alarmclock.Clock.MoEmptyAlarmException;
+import com.moh.alarmclock.Clock.AlarmClock;
+import com.moh.alarmclock.Clock.AlarmClockManager;
+import com.moh.alarmclock.Clock.AlarmClockRecyclerAdapter;
+import com.moh.alarmclock.Clock.ClockSugestions.ClockSuggestionManager;
+import com.moh.alarmclock.Clock.ClockSugestions.PrioritySuggestion;
+import com.moh.alarmclock.Clock.EmptyAlarmException;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnCanceledListener;
@@ -28,7 +28,7 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerVi
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
-public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed, MainActivity.SelectModeInterface {
+public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed, MainActivity.SelectModeInterface {
     /**
      * alarm section
      */
@@ -43,11 +43,11 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
     private TextView title, subTitle;
     private MoCardRecyclerView cardRecyclerView;
     private MoRecyclerView recyclerView;
-    private MoAlarmClockRecyclerAdapter recyclerAdapter;
+    private AlarmClockRecyclerAdapter recyclerAdapter;
     private View emptyView;
     private MoToolBar toolBar;
-    private MoSelectable<MoAlarmClock> selectable;
-    private Iterable<MoPrioritySuggestion> suggestions;
+    private MoSelectable<AlarmClock> selectable;
+    private Iterable<PrioritySuggestion> suggestions;
     private boolean showSuggestions;
 
 
@@ -62,11 +62,11 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
     }
 
     private void initRefreshScreen() {
-        MoAlarmClockManager.refreshScreen = () -> recyclerAdapter.notifyEmptyState().notifyDataSetChanged();
+        AlarmClockManager.refreshScreen = () -> recyclerAdapter.notifyEmptyState().notifyDataSetChanged();
     }
 
     private void initViews() {
-        MoAlarmClockManager.getInstance().load("", activity);
+        AlarmClockManager.getInstance().load("", activity);
         initClockSuggestions();
 
         this.rootConstraint = root.findViewById(R.id.layout_alarmClocks_rootConstraint);
@@ -89,7 +89,7 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
 
         this.cardRecyclerView = root.findViewById(R.id.card_alarmClocks_recycler);
         this.cardRecyclerView.getCardView().makeTransparent();
-        this.recyclerAdapter = new MoAlarmClockRecyclerAdapter(activity, MoAlarmClockManager.getInstance().getAlarms(), this);
+        this.recyclerAdapter = new AlarmClockRecyclerAdapter(activity, AlarmClockManager.getInstance().getAlarms(), this);
         this.recyclerAdapter.setEmptyView(this.emptyView).setRecyclerView(cardRecyclerView.getRecyclerView()).setEmptyViewCallback((isEmpty) -> {
             if (isEmpty) {
                 this.toolBar.hideMiddle();
@@ -118,7 +118,7 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
     }
 
     private void onDeleteClicked() {
-        MoAlarmClockManager.getInstance().removeSelectedAlarms(this.activity);
+        AlarmClockManager.getInstance().removeSelectedAlarms(this.activity);
         selectable.removeAction();
         recyclerAdapter.notifyEmptyState().notifyDataSetChanged();
     }
@@ -133,7 +133,7 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
             @Override
             public void run() {
                 super.run();
-                suggestions = MoClockSuggestionManager.getSuggestions(activity);
+                suggestions = ClockSuggestionManager.getSuggestions(activity);
             }
         }.start();
     }
@@ -204,8 +204,8 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
                 return false;
             });
             int i = 1;
-            for (MoPrioritySuggestion ps : suggestions) {
-                final MoPrioritySuggestion suggestion = ps;
+            for (PrioritySuggestion ps : suggestions) {
+                final PrioritySuggestion suggestion = ps;
                 popup.getMenu().add(ps.getTime());
                 popup.getMenu().getItem(i).setOnMenuItemClickListener(menuItem -> {
                     suggestion.createAlarm(activity);
@@ -244,20 +244,20 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
 
     private void setSubtitle() {
         try {
-            this.subTitle.setText(NEXT_ALARM + MoAlarmClockManager.getInstance().getNextAlarm().getReadableDifference());
-        } catch (MoEmptyAlarmException e) {
-            this.subTitle.setText(MoAlarmClockManager.getInstance().isEmpty() ? "" : ALL_ALARMS_OFF);
+            this.subTitle.setText(NEXT_ALARM + AlarmClockManager.getInstance().getNextAlarm().getReadableDifference());
+        } catch (EmptyAlarmException e) {
+            this.subTitle.setText(AlarmClockManager.getInstance().isEmpty() ? "" : ALL_ALARMS_OFF);
         }
     }
 
     @Override
-    public void onActiveStatusChanged(MoAlarmClock clock) {
+    public void onActiveStatusChanged(AlarmClock clock) {
         // update the subTitle when a clock changes its status
         setSubtitle();
     }
 
     @Override
-    public void onCardClicked(MoAlarmClock clock) {
+    public void onCardClicked(AlarmClock clock) {
         // set the clock to be edited
         CreateAlarmActivity.clock = clock;
         CreateAlarmActivity.startActivityForResult(this.activity, CREATE_ALARM_CODE);
@@ -267,7 +267,7 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
     @Override
     public void onCanceled() {
         updateTitleSubTitle();
-        recyclerAdapter.notifyItemRangeChanged(0, recyclerAdapter.getItemCount(), MoAlarmClockRecyclerAdapter.UPDATE_ENABLED_VIEW);
+        recyclerAdapter.notifyItemRangeChanged(0, recyclerAdapter.getItemCount(), AlarmClockRecyclerAdapter.UPDATE_ENABLED_VIEW);
     }
 
     @Override
