@@ -19,12 +19,12 @@ import androidx.preference.PreferenceManager;
 
 import com.moh.alarmclock.Date.MoDate;
 import com.moh.alarmclock.Id.MoId;
+import com.moh.alarmclock.MoVibration.MoVibration;
 import com.moh.alarmclock.Music.MoMusicPlayer;
 import com.moh.alarmclock.Music.MoVolume;
 import com.moh.alarmclock.Notification.MoNotificationChannel;
-import com.moh.alarmclock.Uri.MoUri;
-import com.moh.alarmclock.MoVibration.MoVibration;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.Uri.MoUri;
 
 public class MoNotificationAlarmSession extends Service {
 
@@ -136,7 +136,6 @@ public class MoNotificationAlarmSession extends Service {
 
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(context);
         boolean addSnooze = moInformation.getClock().getSnooze().isActive();
-        boolean smartCancelEnabled = s.getBoolean(context.getString(R.string.smart_alarm_cancel_switch),false);
 
         customNotification = new NotificationCompat.Builder(context, CHANNEL_ID_ALARM)
                 .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
@@ -148,12 +147,6 @@ public class MoNotificationAlarmSession extends Service {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setOngoing(true)
                 .setOnlyAlertOnce(true);
-
-        customNotification.addAction(R.drawable.ic_baseline_stop_24, STOP_ACTION, smartCancelEnabled ? fullScreenPendingIntent : getAction(context, STOP_ACTION));
-
-        if (addSnooze) {
-            customNotification.addAction(R.drawable.ic_baseline_snooze_24, SNOOZE_ACTION, getAction(context, SNOOZE_ACTION));
-        }
 
         return customNotification.build();
     }

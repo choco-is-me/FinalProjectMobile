@@ -6,11 +6,6 @@
         android:title="Alarm" />
 
     <item
-        android:id="@+id/WorldClock_Section"
-        android:icon="@drawable/ic_globe_24dp"
-        android:title="World Clock" />
-
-    <item
         android:id="@+id/StopWatch_Section"
         android:icon="@drawable/ic_timer_black_24dp"
         android:title="Stopwatch" />

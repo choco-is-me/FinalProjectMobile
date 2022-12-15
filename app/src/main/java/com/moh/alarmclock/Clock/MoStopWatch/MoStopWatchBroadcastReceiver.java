@@ -4,10 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import java.util.TimerTask;
-
 import com.moh.alarmclock.MainActivity;
 import com.moh.alarmclock.Section.MoSectionManager;
+
+import java.util.TimerTask;
 
 public class MoStopWatchBroadcastReceiver extends BroadcastReceiver {
     @Override

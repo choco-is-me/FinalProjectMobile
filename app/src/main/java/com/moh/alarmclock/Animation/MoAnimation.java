@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import java.util.HashMap;
-
 import com.moh.alarmclock.Id.MoId;
 import com.moh.alarmclock.R;
+
+import java.util.HashMap;
 
 public class MoAnimation {
 

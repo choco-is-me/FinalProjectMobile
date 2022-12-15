@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
-
 import com.moh.alarmclock.Color.MoColor;
 
 public class MoTextInput {

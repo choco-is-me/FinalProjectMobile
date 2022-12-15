@@ -11,12 +11,11 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.moh.alarmclock.R;
+import com.moh.alarmclock.Runnable.MoRunnable;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 import java.util.ArrayList;
-
-import com.moh.alarmclock.Runnable.MoRunnable;
-import com.moh.alarmclock.R;
 
 public class MoPresetRecyclerAdapter extends RecyclerView.Adapter<MoPresetRecyclerAdapter.TabViewHolder> {
 

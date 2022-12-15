@@ -20,8 +20,8 @@ import com.moh.alarmclock.Id.MoId;
 import com.moh.alarmclock.Music.MoMusicPlayer;
 import com.moh.alarmclock.Music.MoVolume;
 import com.moh.alarmclock.Notification.MoNotificationChannel;
-import com.moh.alarmclock.Uri.MoUri;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.Uri.MoUri;
 
 public class MoNotificationTimerSession extends Service {
 

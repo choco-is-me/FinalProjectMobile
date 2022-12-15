@@ -1,5 +1,8 @@
 package com.moh.alarmclock;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.RECORD_AUDIO;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -23,32 +26,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.loader.content.CursorLoader;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
 
-import com.takisoft.preferencex.EditTextPreference;
-import com.takisoft.preferencex.PreferenceFragmentCompat;
-
-import java.util.Objects;
-
-import com.moh.alarmclock.Clock.MoClockSugestions.MoClockSuggestionManager;
 import com.moh.alarmclock.Intents.MoIntents;
 import com.moh.alarmclock.Preference.MoPreference;
 import com.moh.alarmclock.Preference.MoPreferenceManager;
 import com.moh.alarmclock.SharedPref.MoSharedPref;
 import com.moh.alarmclock.Theme.MoTheme;
+import com.takisoft.preferencex.PreferenceFragmentCompat;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.RECORD_AUDIO;
+import java.util.Objects;
 
 //import androidx.preference.PreferenceFragmentCompat;
 
 public class SettingsActivity extends AppCompatActivity {
-
-
-    private static final String CONTRADICTION_SMART_VOICE = "The whole purpose of Smart voice cancel" +
-            " is to turn off your alarm without touching your phone. Therefore, we turned of Smart Wake";
-
-    private static final String CONTRADICTION_SMART_WAKE = "Smart wake and Smart voice cancel can not be on at the same time";
 
     private ImageButton back;
     private SettingsFragment settingsFragment;
@@ -141,13 +131,11 @@ public class SettingsActivity extends AppCompatActivity {
             case SettingsFragment.VOICE_RECORDING_PERMISSION:
                 if (0 < grantResults.length && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Audio recording permissions denied. You can not use this feature. We only use your audio for smart voice canceling and it is not recorded by us.", Toast.LENGTH_LONG).show();
-                    settingsFragment.turnOffSmartVoiceCancel();
                 }
                 break;
                 case SettingsFragment.CAMERA_PERMISSION:
                     if (0 < grantResults.length && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(this, "Camera permissions denied. You can not use this feature. We only use camera for object detection.", Toast.LENGTH_LONG).show();
-                        settingsFragment.turnOffSmartAlarmCancel();
                     }
                     break;
             case SettingsFragment.READ_EXTERNAL_STORAGE_PERMISSION:
@@ -175,7 +163,6 @@ public class SettingsActivity extends AppCompatActivity {
         Preference clearAlarmSoundButton;
         MoPreference timerSoundButton;
         Preference clearTimerSoundButton;
-        Preference clearSmartSuggestionsButton;
         Preference resetSettingsButton;
         Activity a;
 
@@ -217,11 +204,9 @@ public class SettingsActivity extends AppCompatActivity {
             initSetTimerMusic();
             initClearAlarmMusic();
             initClearTimerMusic();
-            initClearSuggestions();
             initResetSettings();
             initPrefManager();
 
-            onSelectItemSmartAlarmShake(sharedPreferences,getString(R.string.smart_alarm_list));
         }
 
 
@@ -259,25 +244,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
 
-        @SuppressLint("DefaultLocale")
-        private void initClearSuggestions() {
-            this.clearSmartSuggestionsButton = findPreference(getString(R.string.clear_suggestions));
-            if (this.clearSmartSuggestionsButton != null) {
-                this.clearSmartSuggestionsButton.setOnPreferenceClickListener(preference -> {
-                    new AlertDialog.Builder(a).setPositiveButton("Yes", (dialogInterface, i) -> {
-                        MoClockSuggestionManager.reset(a);
-                        dialogInterface.dismiss();
-                        Toast.makeText(a,"Smart suggestion data was erased!",Toast.LENGTH_SHORT).show();
-                    }).setMessage(String.format("We currently have made %d improvements to smart suggestion. " +
-                            "Do you want to clear Smart Suggestions Data?", MoClockSuggestionManager.size()))
-                            .setNegativeButton("No", (dialogInterface, i) -> {
-                                dialogInterface.dismiss();
-                            }).setTitle("Clear Smart Suggestions").show();
 
-                    return false;
-                });
-            }
-        }
 
         private void initClearAlarmMusic() {
             this.clearAlarmSoundButton = findPreference(a.getString(R.string.alarm_music_clear));
@@ -339,18 +306,8 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
             MoSharedPref.loadAll(a);
-            if(s.equals(getString(R.string.smart_alarm_list))){
-                // we choose an item from the list of smart alarm shake
-                onSelectItemSmartAlarmShake(sharedPreferences,s);
-            }else if(s.equals(getString(R.string.smart_timer_text))){
-                // only 4 digits allowed
-                onSelectTimerText(sharedPreferences,s);
-            }else if(s.equals(getString(R.string.theme_version))){
+            if(s.equals(getString(R.string.theme_version))){
                 MoTheme.updateTheme(a);
-            }else if (s.equals(getString(R.string.smart_voice_cancel))){
-                getVoiceRecordingPermission();
-            }else if(s.equals(getString(R.string.smart_alarm_cancel_switch))){
-                getCameraPermission();
             }
             this.preferenceManager.update(sharedPreferences,s);
         }
@@ -364,28 +321,12 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        // if they have selected object detector get a permission
-        // or change it to tap and tell them via toast
-        void turnOffSmartVoiceCancel(){
-            SwitchPreference p = findPreference(getString(R.string.smart_voice_cancel));
-            if (p != null) {
-                p.setChecked(false);
-            }
-        }
 
         private void getCameraPermission(){
             if (ActivityCompat.checkSelfPermission(a, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(a, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
             }
         }
-
-        void turnOffSmartAlarmCancel(){
-            SwitchPreference p = findPreference(getString(R.string.smart_alarm_cancel_switch));
-            if (p != null) {
-                p.setChecked(false);
-            }
-        }
-
 
         private boolean getReadExternalStoragePermission() {
             if (ActivityCompat.checkSelfPermission(a,
@@ -399,28 +340,13 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
-        private void onSelectItemSmartAlarmShake(SharedPreferences sharedPreferences, String s){
-            String val = sharedPreferences.getString(s,"null");
-            Preference p = findPreference(getString(R.string.smart_alarm_button));
-            if(p == null){
-                return;
-            }
 
-            if(val.equals(getString(R.string.custom))){
-                p.setEnabled(true);
-            }else{
-                p.setEnabled(false);
-            }
-
-        }
 
         private void onSelectTimerText(SharedPreferences sharedPreferences, String s){
             String val = sharedPreferences.getString(s,"");
             if(val.length() > 4){
                 // only 4 digits are allowed
                // int color = getColor(R.color.error_color);
-                EditTextPreference editTextPreference = findPreference(getString(R.string.smart_timer_text));
-                editTextPreference.setText("");
                 Toast.makeText(getContext(),"Only four characters are allowed",Toast.LENGTH_LONG).show();
             }
         }

@@ -19,11 +19,6 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import com.moh.alarmclock.Clock.MoAlarmClock;
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
 import com.moh.alarmclock.Clock.MoRepeating;
@@ -31,6 +26,10 @@ import com.moh.alarmclock.Clock.MoSnooze.MoSnooze;
 import com.moh.alarmclock.Date.MoDate;
 import com.moh.alarmclock.MoVibration.MoVibration;
 import com.moh.alarmclock.MoVibration.MoVibrationTypes;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class CreateAlarmActivity extends AppCompatActivity {
 

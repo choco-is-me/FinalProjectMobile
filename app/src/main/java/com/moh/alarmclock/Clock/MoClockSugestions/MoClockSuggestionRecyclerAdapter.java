@@ -8,11 +8,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 import com.moh.alarmclock.InflatorView.MoInflaterView;
-import com.moh.alarmclock.Runnable.MoRunnable;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.Runnable.MoRunnable;
+
+import java.util.ArrayList;
 
 public class MoClockSuggestionRecyclerAdapter extends RecyclerView.Adapter<MoClockSuggestionRecyclerAdapter.TabViewHolder> {
 

@@ -17,14 +17,13 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
-
-import com.moh.alarmclock.MainActivity;
 import com.moh.alarmclock.Clock.MoAlarmSession.MoInitAlarmSession;
 import com.moh.alarmclock.Date.MoTimeUtils;
+import com.moh.alarmclock.MainActivity;
 import com.moh.alarmclock.Notification.MoNotificationChannel;
+import com.moh.alarmclock.R;
 import com.moh.alarmclock.Runnable.MoRunnable;
 import com.moh.alarmclock.UI.MoTextInput;
-import com.moh.alarmclock.R;
 
 public class MoTimer extends Service {
 

@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.moh.alarmclock.Runnable.MoRunnable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.moh.alarmclock.Runnable.MoRunnable;
 
 public class MoAlarmListView extends ArrayAdapter<MoAlarmClock> {
 

@@ -8,14 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.moh.alarmclock.Date.MoTimeUtils;
+import com.moh.alarmclock.R;
+import com.moh.alarmclock.UI.MoTextView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerAdapters.MoRecyclerAdapter;
 
 import java.util.List;
-
-import com.moh.alarmclock.Date.MoTimeUtils;
-import com.moh.alarmclock.UI.MoTextView;
-import com.moh.alarmclock.R;
 
 public class MoStopWatchRecyclerAdapter extends MoRecyclerAdapter<MoStopWatchRecyclerAdapter.MoStopWatchViewHolder, MoLap> {
 

@@ -1,7 +1,6 @@
 package com.moh.alarmclock;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.transition.ChangeBounds;
 import android.transition.Fade;
@@ -13,18 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnCanceledListener;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
-
-import java.util.Calendar;
 
 import com.moh.alarmclock.Clock.MoAlarmClock;
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
@@ -32,10 +20,13 @@ import com.moh.alarmclock.Clock.MoAlarmClockRecyclerAdapter;
 import com.moh.alarmclock.Clock.MoClockSugestions.MoClockSuggestionManager;
 import com.moh.alarmclock.Clock.MoClockSugestions.MoPrioritySuggestion;
 import com.moh.alarmclock.Clock.MoEmptyAlarmException;
-import com.moh.alarmclock.Clock.MoSnooze.MoSnooze;
-import com.moh.alarmclock.Sensor.MoShakeListener;
-import com.moh.alarmclock.MoVibration.MoVibration;
-import com.moh.alarmclock.MoVibration.MoVibrationTypes;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoFragment.MoOnBackPressed;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoOnCanceledListener;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoBars.MoToolBar;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
 public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActiveClockChanged, MoOnCanceledListener, MoOnBackPressed, MainActivity.SelectModeInterface {
     /**
@@ -168,35 +159,7 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
     }
 
 
-    public void onSmartShake(MoShakeListener shakeListener) {
-        // smart shake
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(activity);
-        boolean active = s.getBoolean(activity.getString(R.string.smart_alarm), false);
-        if (active) {
-            shakeListener.checkToVibrate();
-            MoAlarmClock clock = new MoAlarmClock();
-            String list = s.getString(activity.getString(R.string.smart_alarm_list), "15");
-            try {
-                // it is an amount
-                int amount = Integer.parseInt(list);
-                clock.addDateField(Calendar.MINUTE, amount);
 
-            } catch (Exception e) {
-                // it is a custom time
-                String time = s.getString(activity.getString(R.string.smart_alarm_button), "12:00");
-                String[] hrmin = time.split(":");
-                int hour = Integer.parseInt(hrmin[0]);
-                int minute = Integer.parseInt(hrmin[1]);
-                clock.setDateField(Calendar.HOUR_OF_DAY, hour);
-                clock.setDateField(Calendar.MINUTE, minute);
-            }
-            clock.setSnooze(new MoSnooze(activity,  s.getBoolean(activity.getString(R.string.snooze_general), true)));
-            clock.setVibration(new MoVibration(MoVibrationTypes.BASIC,  s.getBoolean(activity.getString(R.string.vibration_general), true)));
-            clock.setPathToMusic( s.getBoolean(activity.getString(R.string.music_general), true));
-            MoAlarmClockManager.getInstance().addAlarm(clock, activity);
-            updateAll();
-        }
-    }
 
 
     public boolean showMenu(View anchor) {
@@ -267,8 +230,6 @@ public class AlarmSectionManager implements MoAlarmClockRecyclerAdapter.MoOnActi
 
     public void onResume() {
         this.setEnabled(true);
-        this.showSuggestions = PreferenceManager.getDefaultSharedPreferences(activity)
-                .getBoolean(activity.getString(R.string.show_suggestions), false);
     }
 
 

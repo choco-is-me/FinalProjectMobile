@@ -5,12 +5,12 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import java.util.Calendar;
-import java.util.Objects;
-
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
 import com.moh.alarmclock.Date.MoDate;
 import com.moh.alarmclock.R;
+
+import java.util.Calendar;
+import java.util.Objects;
 
 public class MoPrioritySuggestion {
 

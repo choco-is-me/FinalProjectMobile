@@ -3,15 +3,14 @@ package com.moh.alarmclock.Clock.MoClockSugestions;
 
 import android.content.Context;
 
+import com.moh.alarmclock.Clock.MoAlarmClock;
+import com.moh.alarmclock.Date.MoDate;
+import com.moh.alarmclock.ReadWrite.MoReadWrite;
 import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
-
-import com.moh.alarmclock.Clock.MoAlarmClock;
-import com.moh.alarmclock.Date.MoDate;
-import com.moh.alarmclock.ReadWrite.MoReadWrite;
 
 // a way to intelligently tell what time
 // the user will be setting an alarm for

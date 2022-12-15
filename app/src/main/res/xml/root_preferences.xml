@@ -39,17 +39,7 @@
             app:iconSpaceReserved="false"
             app:summary="@string/volume_button_summary" />
 
-        <SeekBarPreference
-            android:defaultValue="50"
-            android:key="@string/shake_sensitivity"
-            android:max="100"
-            android:summary="@string/shake_sensitivity_summary"
-            android:title="@string/shake_sensitivity_title"
-            app:adjustable="true"
-            app:iconSpaceReserved="false"
-            app:min="0"
-            app:seekBarIncrement="10"
-            app:showSeekBarValue="true" />
+
 
         <Preference
             app:iconSpaceReserved="false"
@@ -63,31 +53,6 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="Alarm">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_alarm"
-            app:summary="@string/smart_alarm_shake_summary"
-            app:title="@string/smart_alarm_shake_title" />
-        <ListPreference
-            app:dependency="@string/smart_alarm"
-            app:entries="@array/smart_alarm_shake_entries"
-            app:entryValues="@array/smart_alarm_shake_values"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_alarm_list"
-            app:summary="@string/smart_alarm_shake_list_summary"
-            app:title="@string/smart_alarm_shake_list_title" />
-
-        <com.takisoft.preferencex.TimePickerPreference
-            app:allowDividerBelow="true"
-            app:dependency="@string/smart_alarm_list"
-            app:enabled="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_alarm_button"
-            app:pref_hourFormat="h24"
-            app:pref_summaryHasTime="Selected time: %s"
-            app:summary="@string/smart_alarm_shake_button_summary"
-            app:title="@string/smart_alarm_shake_button_title" />
 
 
         <SwitchPreference
@@ -146,22 +111,6 @@
     <PreferenceCategory
         app:iconSpaceReserved="false"
         app:title="Timer">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_timer"
-            app:summary="@string/smart_timer_shake_summary"
-            app:title="@string/smart_timer_shake_title" />
-
-        <com.takisoft.preferencex.AutoSummaryEditTextPreference
-            android:inputType="number"
-            app:defaultValue="10"
-            app:dependency="@string/smart_timer"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_timer_text"
-            app:pref_summaryHasText="Preset timer is %s minutes"
-            app:summary="@string/smart_timer_shake_text_summary"
-            app:title="@string/smart_timer_shake_text_title" />
 
         <Preference
             app:iconSpaceReserved="false"
@@ -176,90 +125,5 @@
             app:title="@string/timer_music_clear_title" />
 
     </PreferenceCategory>
-
-
-    <PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="Smart Mute">
-
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_mute"
-            app:summary="@string/smart_mute_summary"
-            app:title="@string/smart_mute_title" />
-
-        <SeekBarPreference
-            android:defaultValue="1"
-            android:dependency="@string/smart_mute"
-            android:key="@string/smart_mute_delay"
-            android:max="5"
-            android:summary="@string/smart_mute_delay_summary"
-            android:title="@string/smart_mute_delay_title"
-            app:adjustable="true"
-            app:iconSpaceReserved="false"
-            app:min="0"
-            app:seekBarIncrement="1"
-            app:showSeekBarValue="true" />
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="Smart Cancel">
-
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_alarm_cancel_switch"
-            app:summary="@string/smart_alarm_cancel_switch_summary"
-            app:title="@string/smart_alarm_cancel_switch_title" />
-        <ListPreference
-            app:dependency="@string/smart_alarm_cancel_switch"
-            app:entries="@array/smart_alarm_cancel_entries"
-            app:entryValues="@array/smart_alarm_cancel_values"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_alarm_cancel"
-            app:summary="@string/smart_alarm_cancel_summary"
-            app:title="@string/smart_alarm_cancel_title" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:dependency="@string/smart_alarm_cancel_switch"
-            android:key="@string/smart_alarm_no_choice"
-            android:summary="@string/smart_alarm_no_choice_description"
-            android:title="@string/smart_alarm_no_choice_title"
-            app:iconSpaceReserved="false" />
-
-
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/smart_voice_cancel"
-            app:summary="@string/smart_voice_cancel_summary"
-            app:title="@string/smart_voice_cancel_title" />
-
-    </PreferenceCategory>
-
-
-    <PreferenceCategory
-        app:iconSpaceReserved="false"
-        app:title="Smart Suggestions">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:iconSpaceReserved="false"
-            app:key="@string/show_suggestions"
-            app:summary="@string/show_suggestions_summary"
-            app:title="@string/show_suggestions_title" />
-
-        <Preference
-            app:iconSpaceReserved="false"
-            app:key="@string/clear_suggestions"
-            app:summary="@string/clear_suggestions_summary"
-            app:title="@string/clear_suggestions_title" />
-
-
-    </PreferenceCategory>
-
 
 </PreferenceScreen>

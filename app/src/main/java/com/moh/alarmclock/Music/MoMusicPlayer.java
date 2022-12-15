@@ -1,5 +1,7 @@
 package com.moh.alarmclock.Music;
 
+import static android.content.Context.AUDIO_SERVICE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -8,8 +10,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 
 import java.io.IOException;
-
-import static android.content.Context.AUDIO_SERVICE;
 
 public class MoMusicPlayer {
 

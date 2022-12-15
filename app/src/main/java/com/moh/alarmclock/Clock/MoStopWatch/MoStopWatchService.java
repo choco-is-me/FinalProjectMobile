@@ -13,11 +13,11 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
-import java.util.TimerTask;
-
 import com.moh.alarmclock.Date.MoTimeUtils;
 import com.moh.alarmclock.Notification.MoNotificationChannel;
 import com.moh.alarmclock.R;
+
+import java.util.TimerTask;
 
 public class MoStopWatchService extends Service {
 

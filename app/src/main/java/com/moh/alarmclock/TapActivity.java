@@ -1,7 +1,6 @@
 package com.moh.alarmclock;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.moh.alarmclock.Clock.MoAlarmSession.MoAlarmSessionBroadCast;
-import com.moh.alarmclock.Clock.MoSmartCancel.MoSmartCancel;
-import com.moh.alarmclock.Clock.MoSmartCancel.MoTapCancelAlarm;
 
 public class TapActivity extends AppCompatActivity {
 
@@ -35,23 +32,15 @@ public class TapActivity extends AppCompatActivity {
         this.counter = findViewById(R.id.tap_counter);
         this.nextTest = findViewById(R.id.Another_test_btn);
         this.layout = findViewById(R.id.tap_constrained_layout);
-        this.generateValue();
 
 
         this.counter.setText(this.counterValue+"");
 
         this.nextTest.setOnClickListener((b)->{
            // next test
-            MoSmartCancel.setResultAndFinish(TapActivity.this,MoSmartCancel.NEXT_TEST);
         });
 
-        this.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // decreament counter
-                decAndSet();
-            }
-        });
+
     }
 
     @Override
@@ -59,18 +48,7 @@ public class TapActivity extends AppCompatActivity {
 
     }
 
-    private void decAndSet() {
-        this.counterValue--;
-        if(this.counterValue <= 0){
-            // end this activity
-            MoSmartCancel.setResultAndFinish(this,MoSmartCancel.SUCCESS);
-        }
-        this.counter.setText(this.counterValue+"");
-    }
 
-    private void generateValue(){
-        this.counterValue = MIN_TAPS + MoTapCancelAlarm.getRandom(MAX_TAPS);
-    }
 
     @Override
     public void onAttachedToWindow() {

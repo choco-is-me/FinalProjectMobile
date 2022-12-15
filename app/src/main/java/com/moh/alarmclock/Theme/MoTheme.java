@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.moh.alarmclock.SharedPref.MoSharedPref;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.SharedPref.MoSharedPref;
 
 public class MoTheme {
 

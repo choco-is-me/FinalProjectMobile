@@ -1,11 +1,9 @@
 package com.moh.alarmclock.Clock.MoAlarmSession;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -16,22 +14,16 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.preference.PreferenceManager;
 
-import java.util.Objects;
-
-import com.moh.alarmclock.MainActivity;
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
-import com.moh.alarmclock.Clock.MoSmartCancel.MoObjectDetectionAlarmCancel;
-import com.moh.alarmclock.Clock.MoSmartCancel.MoSmartCancel;
-import com.moh.alarmclock.Clock.MoSmartCancel.MoTapCancelAlarm;
 import com.moh.alarmclock.Clock.MoTimer.MoTimer;
-import com.moh.alarmclock.HotWordDetection.MoHotWordDetector;
-import com.moh.alarmclock.Sensor.MoMovementListener;
+import com.moh.alarmclock.MainActivity;
 import com.moh.alarmclock.R;
+
+import java.util.Objects;
 
 public class MoAlarmSessionActivity extends AppCompatActivity implements GestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener{
@@ -45,7 +37,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     ConstraintLayout constraintLayout;
     MoInitAlarmSession.Type moType;
    // private GestureDetectorCompat detectorCompat;
-    private MoSmartCancel smartCancel;
 
     private TextView snoozeText;
     private TextView stopText;
@@ -53,13 +44,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
     private ImageView stopButton;
 
     private boolean snoozed;
-
-
-
-    MoMovementListener moMovementListener;
-
-
-    private MoHotWordDetector moHotWordDetector;
 
 
     @Override
@@ -132,12 +116,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
             stopButton.setImageDrawable(getDrawable(R.drawable.ic_baseline_timer_off_24));
         }
 
-
-        stopButton.setOnLongClickListener((v) -> {
-            stopAlarmConsiderSmart();
-            return true;
-        });
-
         snoozeButton.setOnLongClickListener((v) -> {
             switch (moType){
                 case CLOCK:
@@ -155,93 +133,14 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
 //        this.detectorCompat = new GestureDetectorCompat(this,this);
 //        detectorCompat.setOnDoubleTapListener(this);
 
-
-        // also if smart cancel is not null start the activity
-        if(MoInitAlarmSession.Type.CLOCK == this.moType){
-            // only do it if it is clock
-            smartCancel = MoSmartCancel.readPreference(this);
-        }
-
-        //starting movement listener
-        activateMovementListener();
-
-        // start listening for voice cancellation
-        initSmartVoiceCancel();
-
         // cancel the timer of notification timer
         MoNotificationTimerSession.cancelTimer();
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (moHotWordDetector != null) {
-            moHotWordDetector.onPause();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(moHotWordDetector!=null)
-            moHotWordDetector.onResume();
-    }
-
-    private void initSmartVoiceCancel(){
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean active = s.getBoolean(getString(R.string.smart_voice_cancel),false);
-        if(active){
-            // only init if it is active in settings
-            // 0.4 sensitivity
-            this.moHotWordDetector = new MoHotWordDetector(this,MoHotWordDetector.HOT_WORD_STOP,0.75f) {
-                @Override
-                public void onWakeWordDetected() {
-                    // cancel alarm?
-                    //maybe replace with stopAlarmConsider
-                    stopAlarm();
-                    //stopAlarmConsiderSmart();
-                }
-            };
-            moHotWordDetector.onResume();
-        }
-
-    }
 
     // activates it only if the user wants it
     // also add a delay so that the alarm rings if they want
-    private void activateMovementListener(){
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean active = s.getBoolean(getString(R.string.smart_mute),false);
-        if(active) {
-            if (this.moInformation.getType() == MoInitAlarmSession.Type.TIMER)
-                return;
-            this.moMovementListener = new MoMovementListener(this.moInformation.getClock().getVibration().isActive()) {
-                @Override
-                public void onStoppedMoving() {
-                    MoNotificationAlarmSession.mute(false);
-                }
-
-                @Override
-                public void onSlowMovement() {
-                    //MoNotificationAlarmSession.mute(true);
-                }
-
-                @Override
-                public void onMoving() {
-                    MoNotificationAlarmSession.mute(true);
-                }
-            };
-            int delaySeconds = s.getInt(getString(R.string.smart_mute_delay),0);
-            Handler handler = new Handler();
-            // delay the task for that amount
-            handler.postDelayed(() -> moMovementListener.start(MoAlarmSessionActivity.this),
-                    delaySeconds*1000);
-
-        }
-    }
-
-
 
     private void snoozeAlarm() {
         if (moInformation.getClock().getSnooze().isActive()) {
@@ -259,18 +158,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         MoTimer.universalTimer.reset(this);
         //MoTimer.universalTimer.startService(this);
     }
-
-
-    @Override
-    protected void onDestroy() {
-        if(moHotWordDetector!=null){
-            moHotWordDetector.onDestroy();
-            moHotWordDetector = null;
-        }
-        super.onDestroy();
-        MoAlarmWakeLock.releaseCpuLock();
-    }
-
 
     @Override
     public void onBackPressed() {
@@ -350,48 +237,6 @@ public class MoAlarmSessionActivity extends AppCompatActivity implements Gesture
         finishAffinity();
         finishAndRemoveTask();
     }
-
-    private void stopAlarmConsiderSmart() {
-        if (smartCancel != null) {
-            // show smart cancel if there is any
-            smartCancel.show(this);
-        } else {
-            stopAlarm();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch(requestCode) {
-            case MoSmartCancel.TAP_CANCEL :
-                if (resultCode == Activity.RESULT_OK) {
-                    if((data != null ? data.getIntExtra(MoSmartCancel.RESULT_ID, 0) : 0) == MoSmartCancel.NEXT_TEST){
-                        // start next test
-                        smartCancel = new MoObjectDetectionAlarmCancel();
-                        smartCancel.show(this);
-                    }else{
-                        // tap cancel was successful
-                        stopAlarm();
-                    }
-
-                }
-                break;
-            case MoSmartCancel.OBJECT_DETECTION_CANCEL :
-                if((data != null ? data.getIntExtra(MoSmartCancel.RESULT_ID, 0) : 0) == MoSmartCancel.NEXT_TEST){
-                    // start next test
-                    smartCancel = new MoTapCancelAlarm();
-                    smartCancel.show(this);
-                }else{
-                    // tap cancel was successful
-                    stopAlarm();
-                }
-                break;
-        }
-
-    }
-
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent motionEvent) {

@@ -43,15 +43,8 @@ dependencies {
     implementation 'com.takisoft.preferencex:preferencex:1.1.0'
     implementation 'com.takisoft.preferencex:preferencex-datetimepicker:1.1.0'
 
-    // tensor flow for smart turn off
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly'
-    implementation 'org.tensorflow:tensorflow-lite-support:0.0.0-nightly'
 
     implementation 'org.jsoup:jsoup:1.10.3'
-
-    // hot-word detection for smart voice cancel
-    implementation(name: 'pocketsphinx-android-5prealpha-release', ext: 'aar')
 
     implementation project(":MoEssentials")
 }

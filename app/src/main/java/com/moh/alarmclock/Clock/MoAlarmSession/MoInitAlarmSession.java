@@ -5,12 +5,12 @@ import android.content.Intent;
 
 import androidx.core.content.ContextCompat;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 import com.moh.alarmclock.Clock.MoAlarmClock;
 import com.moh.alarmclock.Clock.MoAlarmClockManager;
 import com.moh.alarmclock.Clock.MoEmptyAlarmException;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class MoInitAlarmSession {
 

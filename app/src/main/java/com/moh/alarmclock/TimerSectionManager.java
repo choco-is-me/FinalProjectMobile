@@ -3,7 +3,6 @@ package com.moh.alarmclock;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -17,15 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
-
 import com.moh.alarmclock.Animation.MoAnimation;
 import com.moh.alarmclock.Clock.MoTimer.MoTimer;
 import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoPresetRecyclerAdapter;
@@ -34,16 +29,14 @@ import com.moh.alarmclock.Clock.MoTimer.MoTimerPresetPackage.MoTimerPresetManage
 import com.moh.alarmclock.Date.MoTimeUtils;
 import com.moh.alarmclock.Runnable.MoRunnable;
 import com.moh.alarmclock.Section.MoSectionManager;
-import com.moh.alarmclock.Sensor.MoShakeListener;
 import com.moh.alarmclock.UI.MoTextInput;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 
 public class TimerSectionManager implements MainActivity.SelectModeInterface {
     private final MainActivity mainActivity;
     /**
      * timer
      */
-
-    private final String SMART_SHAKE_TIMER_VALUE = "10";
 
     private final String ENTER_TIME = "Please enter a time above first";
     ConstraintLayout timer_liner_layout;
@@ -273,33 +266,6 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
         }
     }
 
-    public void onSmartShake(MoShakeListener shakeListener){
-        SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(mainActivity);
-        boolean active = s.getBoolean(mainActivity.getString(R.string.smart_timer),false);
-        if(active){
-            if(MoTimer.universalTimer.isCreated()){
-                Snackbar.make(cancelTimer,"Shake detected. However, " +
-                        "there is a timer running already. Stop that first.",Snackbar.LENGTH_LONG)
-                        .setAnchorView(cancelTimer)
-                        .setBackgroundTint(mainActivity.getColor(R.color.error_color))
-                        .setTextColor(mainActivity.getColor(R.color.snack_bar_text))
-                        .show();
-                return;
-            }
-
-            shakeListener.checkToVibrate();
-            String minutes = s.getString(mainActivity.getString(R.string.smart_timer_text),SMART_SHAKE_TIMER_VALUE);
-            if(minutes.isEmpty()){
-                minutes = SMART_SHAKE_TIMER_VALUE;
-            }
-            int mins = Integer.parseInt(minutes);
-            //set the timer time on shake
-            setTextsMilli(mins*60*1000);
-            // and start it
-            startTimer(startTimer);
-        }
-
-    }
 
     private void startTimer(View v){
         long milliSeconds = getMilliSeconds();

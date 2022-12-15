@@ -10,14 +10,6 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
-import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
-import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
-import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
-
-import java.util.Calendar;
-import java.util.Objects;
-
 import com.moh.alarmclock.Animation.MoAnimation;
 import com.moh.alarmclock.Clock.MoSnooze.MoSnooze;
 import com.moh.alarmclock.Color.MoColor;
@@ -26,10 +18,17 @@ import com.moh.alarmclock.Date.MoDate;
 import com.moh.alarmclock.Id.MoId;
 import com.moh.alarmclock.InflatorView.MoInflaterView;
 import com.moh.alarmclock.InflatorView.MoViewDisplayable;
-import com.moh.alarmclock.UI.MoTextInput;
 import com.moh.alarmclock.MoVibration.MoVibration;
 import com.moh.alarmclock.MoVibration.MoVibrationTypes;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.UI.MoTextInput;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoFile;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoLoadable;
+import com.moofficial.moessentials.MoEssentials.MoFileManager.MoIO.MoSavable;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectableInterface.MoSelectableItem;
+
+import java.util.Calendar;
+import java.util.Objects;
 
 public class MoAlarmClock implements MoSavable, MoViewDisplayable, MoLoadable, MoSelectableItem {
 

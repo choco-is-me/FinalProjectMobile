@@ -5,9 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import java.util.List;
-
 import com.moh.alarmclock.Animation.MoAnimation;
+
+import java.util.List;
 
 public class MoLap_ListAdapter extends ArrayAdapter<MoLap> {
 

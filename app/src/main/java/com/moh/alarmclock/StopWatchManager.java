@@ -5,13 +5,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
-import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
-
 import com.moh.alarmclock.Clock.MoStopWatch.MoStopWatch;
 import com.moh.alarmclock.Clock.MoStopWatch.MoStopWatchRecyclerAdapter;
 import com.moh.alarmclock.Section.MoSectionManager;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;
+import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
 public class StopWatchManager {
     /**

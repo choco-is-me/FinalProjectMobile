@@ -11,6 +11,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.moh.alarmclock.Color.MoColor;
+import com.moh.alarmclock.R;
+import com.moh.alarmclock.UI.MoTextInput;
 import com.moofficial.moessentials.MoEssentials.MoLog.MoLog;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInflatorView.MoInflaterView;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable.MoSelectable;
@@ -18,10 +21,6 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoInteractable.MoSelectable
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerAdapters.MoSelectableAdapter;
 
 import java.util.List;
-
-import com.moh.alarmclock.Color.MoColor;
-import com.moh.alarmclock.UI.MoTextInput;
-import com.moh.alarmclock.R;
 
 public class MoAlarmClockRecyclerAdapter extends
         MoSelectableAdapter<MoAlarmClockRecyclerAdapter.MoAlarmClockViewHolder, MoAlarmClock> {

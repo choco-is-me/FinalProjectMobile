@@ -29,12 +29,9 @@
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity android:name="com.moh.alarmclock.TapActivity" android:screenOrientation="portrait"/>
-        <activity android:name="com.moh.alarmclock.ObjectDetectorActivity" android:screenOrientation="portrait" />
         <activity
             android:name="com.moh.alarmclock.SettingsActivity"
             android:label="@string/title_activity_mo_settings" />
-        <activity android:name="com.moh.alarmclock.AddWorldClockActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name="com.moh.alarmclock.Clock.MoAlarmSession.MoAlarmSessionActivity"
             android:showForAllUsers="true"

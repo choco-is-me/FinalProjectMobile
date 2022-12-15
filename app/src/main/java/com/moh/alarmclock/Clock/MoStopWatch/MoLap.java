@@ -7,8 +7,8 @@ import android.widget.TextView;
 import com.moh.alarmclock.Date.MoTimeUtils;
 import com.moh.alarmclock.InflatorView.MoInflaterView;
 import com.moh.alarmclock.InflatorView.MoViewDisplayable;
-import com.moh.alarmclock.UI.MoTextView;
 import com.moh.alarmclock.R;
+import com.moh.alarmclock.UI.MoTextView;
 
 public class MoLap implements MoViewDisplayable {
 
