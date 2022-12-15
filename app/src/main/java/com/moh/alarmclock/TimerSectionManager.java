@@ -175,7 +175,7 @@ public class TimerSectionManager implements MainActivity.SelectModeInterface {
     private void updatePauseButton(TextView pauseTimer, String pauseButtonText) {
         pauseTimer.setText(pauseButtonText);
         this.pauseTimer.setBackgroundColor(MoTimer.universalTimer.showingResume()?
-                mainActivity.getColor(R.color.resumeButton):mainActivity.getColor(R.color.colorPrimary));
+                mainActivity.getColor(R.color.colorPrimary):mainActivity.getColor(R.color.colorPrimary));
     }
 
     private void initRecyclerView() {

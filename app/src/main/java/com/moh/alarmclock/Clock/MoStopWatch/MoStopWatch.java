@@ -152,7 +152,7 @@ public abstract class MoStopWatch{
     }
 
     public int getStopColor(){
-        return this.isRunning? activity.getColor(R.color.error_color):activity.getColor(R.color.resumeButton);
+        return this.isRunning? activity.getColor(R.color.error_color):activity.getColor(R.color.colorPrimary);
     }
 
     public String getLapString(){

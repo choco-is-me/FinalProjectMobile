@@ -79,7 +79,7 @@ public class MoLap implements MoViewDisplayable {
                 MoTextView.syncColor(c.getColor(R.color.error_color),indexTv,timeLap,diffTimeLap);
                 break;
             case MoLapManager.LOWEST_STATUS:
-                MoTextView.syncColor(c.getColor(R.color.resumeButton),indexTv,timeLap,diffTimeLap);
+                MoTextView.syncColor(c.getColor(R.color.colorPrimary),indexTv,timeLap,diffTimeLap);
                 break;
             case MoLapManager.NONE_STATUS:
                 MoTextView.syncColor(c.getColor(R.color.color_text_disabled),indexTv,timeLap,diffTimeLap);

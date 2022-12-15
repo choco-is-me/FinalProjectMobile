@@ -15,11 +15,7 @@
 
     <color name="setting_toolbar_background">@color/MaterialDark</color>
 
-    <color name="resumeButton">#5CABEA</color>
-
     <color name="preset_selected_color">#B740C0C5</color>
-
-    <color name="MoDarkLight">@color/MaterialDark</color>
 
     <color name="color_text_enabled">@color/colorPrimary_DarkMode</color>
     <color name="color_text_disabled">@color/MoWhite</color>

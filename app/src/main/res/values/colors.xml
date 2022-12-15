@@ -17,9 +17,6 @@
 
     <color name="divider_color">@color/colorPrimaryDark</color>
 
-
-    <color name="resumeButton">#FF9800</color>
-
     <color name="error_color">#E24444</color>
     <color name="error_color10">#19E24444</color>
 

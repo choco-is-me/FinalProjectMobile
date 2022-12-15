@@ -2,11 +2,11 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/background_animation_cyan_black"
+        android:drawable="@drawable/background_animation_orange_black"
         android:duration="5000"/>
 
     <item
-        android:drawable="@drawable/background_animation_darkgreen_black"
+        android:drawable="@drawable/background_animation_darkor_black"
         android:duration="5000"/>
 
     <item
