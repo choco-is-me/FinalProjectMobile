@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_cityView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="@dimen/card_corners_top"
+    app:cardPreventCornerOverlap="true">
+
+    <LinearLayout
+        android:id="@+id/layout_cityView_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/cityView_horizontalMargin"
+        android:paddingEnd="@dimen/cityView_horizontalMargin"
+        android:paddingTop="@dimen/cityView_verticalMargin"
+        android:paddingBottom="@dimen/cityView_verticalMargin">
+
+        <TextView
+            android:id="@+id/time_world_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:06"
+            style="@style/AlarmClockStyle.worldClock"/>
+
+        <TextView
+            android:id="@+id/date_world_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021/02/13"
+            android:textStyle="bold"
+            style="@style/AlarmClockDateStyle" />
+
+        <TextView
+            android:id="@+id/name_city_world_clock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vancouver"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/textTimeColor"/>
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+

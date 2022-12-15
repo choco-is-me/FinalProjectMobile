@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#a5d6a7</color>
+    <color name="colorPrimaryDark">#00695c</color>
+    <color name="colorAccent">#a7ffeb</color>
+    <color name="colorAccent10">#1AA7FFEB</color>
+
+    <color name="divider_color">@color/colorPrimary_DarkMode</color>
+
+    <color name="error_color">#cf6679</color>
+    <color name="error_color10">#1ACF6679</color>
+
+    <color name="snack_bar_text">@color/MoBlack</color>
+
+    <color name="setting_toolbar_background">@color/MaterialDark</color>
+
+    <color name="resumeButton">#5CABEA</color>
+
+    <color name="preset_selected_color">#B740C0C5</color>
+
+    <color name="MoDarkLight">@color/MaterialDark</color>
+
+    <color name="color_text_enabled">@color/colorPrimary_DarkMode</color>
+    <color name="color_text_disabled">@color/MoWhite</color>
+    <color name="preset_glow_effect">@color/MoWhite</color>
+
+    <color name="notification_timer_background">@color/colorPrimary_DarkMode</color>
+    <color name="notification_stopwatch_background">@color/colorPrimary_DarkMode</color>
+    <color name="notification_text_color">@android:color/black</color>
+
+
+    <color name="selected_item_color">@color/colorPrimary</color>
+    <color name="selected_item_color_overlay">#0700897B</color>
+
+    <color name="textTimeColor">@color/MoWhite</color>
+
+</resources>

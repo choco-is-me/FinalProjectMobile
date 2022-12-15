@@ -1,0 +1,105 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/MoBlack</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+
+        <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
+        <item name="imageButtonStyle">@style/MoImageButton_Style_Light</item>
+    </style>
+
+    <style name="MoImageButton_Style_Light" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@color/MoBlack</item>
+    </style>
+
+    <style name="CardView.MoclockStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">4dp</item>
+    </style>
+
+    <style name="MoBottomNavigationStyleLight" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/MoWhite</item>
+    </style>
+
+
+    <style name="MoButtonStyle_Light" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/MoWhite</item>
+    </style>
+
+    <style name="MoTitleTextStyle" parent="TextAppearance.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">sans-serif-thin</item>
+        <!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+
+    </style>
+
+
+    <style name="WindowAnimationStyle">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+
+    <style name="MoPresetCardStyle" parent="Widget.MaterialComponents.CardView">
+        <!-- Customize your theme here. -->
+        <item name="android:backgroundTint">@android:color/white</item>
+        <item name="cardElevation">@dimen/medium_elevation</item>
+    </style>
+
+
+    <style name="AppBottomSheetDialogTheme"
+        parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle"
+        parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/round_bottom_sheet</item>
+    </style>
+
+
+    <style name="notification_timer_text" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/timer_textSize</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/notification_text_color</item>
+    </style>
+
+    <style name="AlarmClockStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">45sp</item>
+        <item name="android:textColor">@color/textTimeColor</item>
+    </style>
+
+    <style name="AlarmClockStyle.worldClock" parent="AlarmClockStyle"/>
+
+    <style name="AlarmClockDateStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/textTimeColor</item>
+    </style>
+
+    <style name="StopWatchTimerStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-thin</item>
+        <item name="android:textSize">65sp</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:text">00</item>
+        <item name="android:textColor">@color/textTimeColor</item>
+    </style>
+
+    <style name="StopWatchTimerStyle.Timer" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">sans-serif-thin</item>
+        <item name="android:textSize">65sp</item>
+        <item name="android:maxLength">2</item>
+        <item name="android:hint">00</item>
+    </style>
+
+</resources>
