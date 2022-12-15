@@ -86,11 +86,6 @@
         <service android:name="com.moh.alarmclock.Clock.MoAlarmSession.MoNotificationTimerSession" />
 
         <receiver android:name="com.moh.alarmclock.Clock.MoStopWatch.MoStopWatchBroadcastReceiver" />
-
-        <activity
-            android:name="com.moh.alarmclock.Tensorflow.DetectorActivity"
-            android:label="@string/tfe_od_app_name"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
