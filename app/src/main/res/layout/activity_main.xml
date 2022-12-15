@@ -188,7 +188,7 @@
                 android:layout_margin="8dp"
                 android:layout_weight="1"
                 android:text="@string/start"
-                app:backgroundTint="#3ACF40" />
+                app:backgroundTint="@color/colorPrimary" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_time_timer_button"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#875000</color>
+    <color name="colorPrimaryDark">#F8BD67</color>
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="colorAccent10">#423420</color>
 
@@ -18,7 +18,7 @@
     <color name="divider_color">@color/colorPrimaryDark</color>
 
 
-    <color name="resumeButton">#4CAF50</color>
+    <color name="resumeButton">#FF9800</color>
 
     <color name="error_color">#E24444</color>
     <color name="error_color10">#19E24444</color>
