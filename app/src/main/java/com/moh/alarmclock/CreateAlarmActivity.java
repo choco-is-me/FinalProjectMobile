@@ -33,11 +33,7 @@ import java.util.List;
 
 public class CreateAlarmActivity extends AppCompatActivity {
 
-
-    // this is for when the user is trying to edit the clock
-    // this is what changed
     public static AlarmClock clock;
-
 
     TimePicker timePicker;
     ImageButton datePicker;
@@ -68,7 +64,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
         setListeners();
     }
 
-
     private void init() {
         this.datePicker = findViewById(R.id.date_picker_image_button);
         this.datePickerTv = findViewById(R.id.date_text_view);
@@ -88,7 +83,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
         initEditMode();
     }
 
-    // loads the preferences of the user inside
     private void initPrefMode() {
         SharedPreferences s = PreferenceManager.getDefaultSharedPreferences(this);
         this.snooze.setChecked(s.getBoolean(getString(R.string.snooze_general), true));
@@ -98,31 +92,19 @@ public class CreateAlarmActivity extends AppCompatActivity {
 
     private void initEditMode() {
         if (isEditMode()) {
-            // time
             this.timePicker.setMinute(clock.getDateTime().get(Calendar.MINUTE));
             this.timePicker.setHour(clock.getDateTime().get(Calendar.HOUR_OF_DAY));
-
-            // title
             this.alarmName.setText(clock.getTitle());
             this.vibration.setChecked(clock.getVibration().isActive());
             this.snooze.setChecked(clock.getSnooze().isActive());
-
             this.music.setChecked(clock.hasMusic());
-
             this.activatePositionChips(clock.getRepeating().getRepeating());
-
             this.myCalendar = clock.getDateTime();
-
-            // if activated chips are not empty
-            // then show the days
             if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
-                //List<String> texts = getTextChips();
                 updateDateTextView(Repeating.readableFormat(this.getPositionChips()));
             } else {
                 updateDateTextView(Date.getReadableDate(this.myCalendar));
             }
-            // then this alarm is already created just change things
-            // change the interface
         }
     }
 
@@ -139,7 +121,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
         this.thursday = findViewById(R.id.Thursday_Chip);
         this.friday = findViewById(R.id.Friday_Chip);
         this.saturday = findViewById(R.id.Saturday_Chip);
-
         this.chips = new ArrayList<>();
         this.chips.add(sunday);
         this.chips.add(monday);
@@ -151,7 +132,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
 
         CompoundButton.OnCheckedChangeListener listener = (compoundButton, b) -> {
             if (this.weekdaysChip.getCheckedChipIds().size() > 0) {
-                //List<String> texts = getTextChips();
                 updateDateTextView(Repeating.readableFormat(this.getPositionChips()));
             } else {
                 updateDateTextView(Date.getReadableDate(this.myCalendar));
@@ -168,7 +148,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
     private List<String> getTextChips() {
         List<String> texts = new ArrayList<>();
         if (this.weekdaysChip.getCheckedChipIds().size() == 7) {
-            // every day is checked
             texts.add("Everyday");
             return texts;
         }
@@ -246,7 +225,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
 
     private void setListeners() {
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
-            // TODO Auto-generated method stub
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -256,13 +234,11 @@ public class CreateAlarmActivity extends AppCompatActivity {
         DatePickerDialog dialog = new DatePickerDialog(this, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH));
-        // making sure that the user can not choose a timer before the current time
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         this.datePicker.setOnClickListener((v) -> dialog.show());
 
 
         this.save.setOnClickListener((v) -> {
-            // save alarm
             save();
         });
 
@@ -276,7 +252,6 @@ public class CreateAlarmActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // removing the reference of editing
         if (clock != null) {
             clock = null;
         }
@@ -287,10 +262,8 @@ public class CreateAlarmActivity extends AppCompatActivity {
         AlarmClock c;
         if (isEditMode()) {
             c = clock;
-            // this alarm already has an id
         } else {
             c = new AlarmClock();
-            // setting an id for this which is unique
             c.setId(AlarmClockManager.getInstance().getNextId());
         }
         c.setTitle(this.alarmName.getText().toString());
@@ -302,15 +275,12 @@ public class CreateAlarmActivity extends AppCompatActivity {
         c.setRepeating(new Repeating(this.getPositionChips()));
         if (isEditMode()) {
             c.setActive(true);
-            // just update/save the changes also activate since this might be earlier than others
             AlarmClockManager.getInstance().saveActivate(this);
             Toast.makeText(this, "Alarm changed to " +
                     c.getDate().getReadableDifference(Calendar.getInstance()), Toast.LENGTH_LONG).show();
         } else {
-            // add alarm if not editing
             AlarmClockManager.getInstance().addAlarm(c, this);
         }
-
         finish();
     }
 

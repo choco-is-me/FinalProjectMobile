@@ -38,29 +38,15 @@ public class AlarmActivity extends AppCompatActivity {
         statusBar();
         activateWakeLocks();
         window();
-        //playSound(this,getAlarmUri());
 
         setContentView(R.layout.activity_mo_alarm);
         backgroundAnimation();
-
-
         Button button = findViewById(R.id.stop_alarm_button);
         button.setOnClickListener(v -> stopAlarm());
-
-
-
         AlarmClockManager.getInstance().activateNextAlarm(this.getBaseContext());
-
-
     }
 
-
     private void backgroundAnimation() {
-        //ConstraintLayout constraintLayout = findViewById(R.id.alarm_activity_layout);
-//        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
-//        animationDrawable.setEnterFadeDuration(2000);
-//        animationDrawable.setExitFadeDuration(4000);
-//        animationDrawable.startService();
     }
 
     private  void playSound(Context context, Uri alert){
@@ -77,9 +63,7 @@ public class AlarmActivity extends AppCompatActivity {
             Log.i("AlarmReceiver", "No audio files are Found!");
         }
     }
-    //
-//
-//
+
     @SuppressLint("InvalidWakeLockTag")
     protected void createWakeLocks(){
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -87,14 +71,12 @@ public class AlarmActivity extends AppCompatActivity {
         partialWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "Loneworker - PARTIAL WAKE LOCK");
     }
 
-    // Called implicitly when device is about to sleep or application is backgrounded
     protected void onPause(){
         super.onPause();
         partialWakeLock.acquire();
 
     }
 
-    // Called implicitly when device is about to wake up or foregrounded
     protected void onResume(){
         super.onResume();
         if(fullWakeLock.isHeld()){
@@ -106,7 +88,6 @@ public class AlarmActivity extends AppCompatActivity {
 
     }
 
-    // Called whenever we need to wake up the device
     public void wakeDevice() {
         if ((fullWakeLock != null) &&           // we have a WakeLock
                 (fullWakeLock.isHeld() == false)) {  // but we don't hold it
@@ -118,7 +99,7 @@ public class AlarmActivity extends AppCompatActivity {
         KeyguardManager.KeyguardLock keyguardLock = keyguardManager.newKeyguardLock("TAG");
         keyguardLock.disableKeyguard();
     }
-    //
+
     private Uri getAlarmUri(){
         Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
         if (alert == null){
@@ -129,7 +110,7 @@ public class AlarmActivity extends AppCompatActivity {
         }
         return  alert;
     }
-    //
+
     protected  void onStop(){
         super.onStop();
         if(partialWakeLock.isHeld()){
@@ -140,9 +121,7 @@ public class AlarmActivity extends AppCompatActivity {
         }
 
     }
-    //
-//
-//
+
     private void statusBar() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -178,7 +157,6 @@ public class AlarmActivity extends AppCompatActivity {
 
 
     private void stopAlarm() {
-//        mMediaPlayer.stop();
         finish();
     }
 }

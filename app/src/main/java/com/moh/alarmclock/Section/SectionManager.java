@@ -17,8 +17,7 @@ public class SectionManager implements MoSavable, Save, MoLoadable {
 
     public static final int ALARM_SECTION = 0 ;
     public static final int STOP_WATCH_SECTION = 1;
-    public static final int WORLD_CLOCK_SECTION = 2;
-    public static final int TIMER_SECTION = 3;
+    public static final int TIMER_SECTION = 2;
 
 
     private int section;
@@ -46,22 +45,12 @@ public class SectionManager implements MoSavable, Save, MoLoadable {
         onSectionChangedListener.remove(listener);
     }
 
-    /**
-     * loads a savable object into its class
-     *
-     * @param data
-     * @param context
-     */
     @Override
     public void load(String data, Context context) {
         String value = ReadWrite.readFile(FILE_NAME,context);
         this.section = Integer.parseInt(value);
     }
 
-    /**
-     * @return the data that is going to be saved by the save method
-     * inside the class which implements MoSavable
-     */
     @Override
     public String getData() {
         return this.section+"";

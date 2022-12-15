@@ -138,29 +138,14 @@ public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActive
         }.start();
     }
 
-    /**
-     * launches the alarm creator activity
-     * to let the user make an alarm
-     */
     private void launchAlarmCreate() {
         setEnabled(false);
         Intent intent = new Intent(activity, CreateAlarmActivity.class);
         activity.startActivityForResult(intent, CREATE_ALARM_CODE);
     }
 
-    /**
-     * enables or disables the buttons
-     * so that the user can not open an activity twice
-     *
-     * @param b
-     */
     private void setEnabled(boolean b) {
-
     }
-
-
-
-
 
     public boolean showMenu(View anchor) {
         PopupMenu popup = new PopupMenu(activity, anchor);
@@ -181,19 +166,7 @@ public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActive
         return true;
     }
 
-
-    /**
-     * showing smart suggestion when user is trying to make a new alarm
-     * this way if our intelligent system understands that they want to set an alarm for
-     * a specific time, we just make it much easier for them to do
-     * this option can be disabled from the settings
-     * by using the shared preferences
-     *
-     * @param anchor the pop up menu is anchored to this view
-     */
     private void showSuggestionPopUp(View anchor) {
-        // check for preferences set in the setting
-        // to see if they even want a suggestion
         if (!showSuggestions || !suggestions.iterator().hasNext()) {
             launchAlarmCreate();
         } else {
@@ -220,8 +193,6 @@ public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActive
         }
     }
 
-
-    // user pressed setting menu item
     private void onSettingPressed() {
         Intent intent = new Intent(activity, SettingsActivity.class);
         activity.startActivity(intent);
@@ -231,7 +202,6 @@ public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActive
     public void onResume() {
         this.setEnabled(true);
     }
-
 
     public void updateSubTitle() {
         setSubtitle();
@@ -252,18 +222,15 @@ public class AlarmSectionManager implements AlarmClockRecyclerAdapter.MoOnActive
 
     @Override
     public void onActiveStatusChanged(AlarmClock clock) {
-        // update the subTitle when a clock changes its status
         setSubtitle();
     }
 
     @Override
     public void onCardClicked(AlarmClock clock) {
-        // set the clock to be edited
         CreateAlarmActivity.clock = clock;
         CreateAlarmActivity.startActivityForResult(this.activity, CREATE_ALARM_CODE);
     }
 
-    // called when selectable is canceled or ended
     @Override
     public void onCanceled() {
         updateTitleSubTitle();

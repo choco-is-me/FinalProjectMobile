@@ -375,7 +375,6 @@ public class AlarmClock implements MoSavable, ViewDisplayable, MoLoadable, MoSel
         this.snooze.load(components[3],context);
         this.repeating.load(components[4],context);
         this.dateTime.load(components[5],context);
-        //this.dateTime
         this.isActive = Boolean.parseBoolean(components[6]);
         this.pathToMusic = Boolean.parseBoolean(components[7]);
     }

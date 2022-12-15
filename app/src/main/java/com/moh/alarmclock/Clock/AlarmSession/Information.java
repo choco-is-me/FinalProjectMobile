@@ -12,7 +12,6 @@ public class Information {
     private  String rightButton;
     private  InitAlarmSession.Type type;
 
-    // only if its an alarm clock
     private int id;
     private AlarmClock clock;
 

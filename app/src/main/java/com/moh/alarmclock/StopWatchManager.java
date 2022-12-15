@@ -13,15 +13,12 @@ import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerVi
 import com.moofficial.moessentials.MoEssentials.MoUI.MoView.MoViews.MoNormal.MoCardRecyclerView;
 
 public class StopWatchManager {
-    /**
-     * stop watch
-     */
 
     private TextView minute;
     private TextView second;
     private TextView milliSecond;
-    private Button start;// stop and resume are the same
-    private Button stop;// lap and reset are the same
+    private Button start;
+    private Button stop;
     private Button lap;
     private MoCardRecyclerView cardRecyclerView;
     private MoRecyclerView recyclerView;
@@ -47,8 +44,6 @@ public class StopWatchManager {
         lap = tripleRoot.findViewById(R.id.button_tripleSetup_right);
 
         headerLaps = root.findViewById(R.id.header_stopWatch_laps);
-
-
 
         this.start.setOnClickListener(view -> {
             StopWatch.universal.start();

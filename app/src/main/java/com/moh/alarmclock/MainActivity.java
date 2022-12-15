@@ -25,10 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private final TimerSectionManager timerSectionManager = new TimerSectionManager(this);
     private final StopWatchManager stopWatchManager = new StopWatchManager(this);
     private AlarmSectionManager alarmSectionManager;
-    /**
-     * world clock
-     */
-    public static final int ADD_WORLD_CLOCK_CODE = 0;
     private BottomNavigationView bottomNavigation;
     private View bottomDeleteBar;
 
@@ -61,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         this.initBottomNavigation();
         this.initAlarmSection();
         timerSectionManager.closeTimerService();
-        // adding all the animations to a sparse array
         Theme.updateTheme(this);
     }
 
@@ -102,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case SectionManager.TIMER_SECTION:
                 changeLayout(false, false, true, false, true);
-                break;
-            case SectionManager.WORLD_CLOCK_SECTION:
-                changeLayout(false, false, false, true, true);
                 break;
         }
     }

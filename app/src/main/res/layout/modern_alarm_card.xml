@@ -27,6 +27,7 @@
             android:layout_marginEnd="@dimen/card_alarm_viewMargin"
             android:text="20:14"
             android:textColor="#000000"
+            android:textColorLink="#FF9800"
             app:layout_constraintBottom_toTopOf="@id/linear_date_repeating"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

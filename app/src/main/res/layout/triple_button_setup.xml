@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/resume"
-        app:backgroundTint="#4CAF50"
+        app:backgroundTint="#829C83"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/button_tripleSetup_left"

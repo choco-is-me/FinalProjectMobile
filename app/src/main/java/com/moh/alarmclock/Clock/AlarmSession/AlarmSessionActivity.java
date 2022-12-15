@@ -29,10 +29,7 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
 
     private Information information;
     InitAlarmSession.Type moType;
-   // private GestureDetectorCompat detectorCompat;
-
     private boolean snoozed;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +51,12 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
     }
 
     private void hideSystemUI() {
-        // Enables regular immersive mode.
-        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
-        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        // Set the content to appear under the system bars so that the
-                        // content doesn't resize when the system bars hide and show.
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        // Hide the nav bar and status bar
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
         );
@@ -110,20 +101,8 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
             }
             return true;
         });
-
-
-
-//        this.detectorCompat = new GestureDetectorCompat(this,this);
-//        detectorCompat.setOnDoubleTapListener(this);
-
-        // cancel the timer of notification timer
         NotificationTimerSession.cancelTimer();
     }
-
-
-
-    // activates it only if the user wants it
-    // also add a delay so that the alarm rings if they want
 
     private void snoozeAlarm() {
         if (information.getClock().getSnooze().isActive()) {
@@ -139,19 +118,16 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
         this.stopAlarm();
         MainActivity.isInApp = false;
         Timer.universalTimer.reset(this);
-        //Timer.universalTimer.startService(this);
     }
 
     @Override
     public void onBackPressed() {
-        // dont close the activity on back pressed
     }
 
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) || keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-            //Do something
             boolean b = handleVolumeDownUp();
             if(b)
                 return true;
@@ -160,8 +136,6 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
     }
 
     public boolean handleVolumeDownUp() {
-        // only continue if this is an alarm
-        // volume buttons during timer should inc/dec volume
         if(this.moType != InitAlarmSession.Type.CLOCK)
             return false;
 
@@ -169,14 +143,11 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
         String index = s.getString(getString(R.string.volume_button),"-3");
         switch (index){
             case "-3":
-                // do nothing
                 return true;
             case "1":
-                // snooze alarm
                 snoozeAlarm();
                 return true;
             case "2":
-                // control volumes
                 return false;
         }
         return false;
@@ -184,7 +155,6 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-//        detectorCompat.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
 
@@ -194,7 +164,6 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
             Intent i;
             switch (information.getType()) {
                 case CLOCK:
-                    // different situations where the service needs to know about it
                     if(snoozed){
                         NotificationAlarmSession.snoozeSituation();
                     }else{
@@ -221,8 +190,6 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
-        // we snooze the alarm for another time that they already have picked
-
         return true;
     }
 
@@ -238,7 +205,6 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
 
     @Override
     public void onShowPress(MotionEvent motionEvent) {
-
     }
 
     @Override
@@ -253,13 +219,10 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
 
     @Override
     public void onLongPress(MotionEvent motionEvent) {
-//        stopAlarmConsiderSmart();
     }
 
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         return false;
     }
-
-
 }
