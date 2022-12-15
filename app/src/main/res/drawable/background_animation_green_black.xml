@@ -32,8 +32,8 @@
 
     <gradient android:angle="45"
 
-        android:startColor="@color/Dark_Green"
-        android:centerColor="@color/MoBlack"
+        android:startColor="#FF9800"
+        android:centerColor="#E9000000"
         android:type="sweep"/>
 
 <!--    <gradient android:angle="45"-->

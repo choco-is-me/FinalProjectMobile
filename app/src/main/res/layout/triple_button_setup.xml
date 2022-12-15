@@ -19,22 +19,24 @@
         android:id="@+id/button_tripleSetup_left"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/stop"
         android:layout_margin="8dp"
+        android:text="@string/stop"
+        app:backgroundTint="#F44336"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_tripleSetup_right"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_tripleSetup_right"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/resume"
         android:layout_margin="8dp"
-        app:layout_constraintStart_toEndOf="@id/button_tripleSetup_left"
+        android:text="@string/resume"
+        app:backgroundTint="#FF9800"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toEndOf="@id/button_tripleSetup_left"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

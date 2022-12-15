@@ -28,6 +28,8 @@
             android:clipChildren="false"
             app:elevation="0dp"
             app:itemHorizontalTranslationEnabled="false"
+            app:itemIconTint="#FF9800"
+            app:itemTextColor="#FF9800"
             app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_navigation">
 
@@ -185,7 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="@string/start" />
+                android:text="@string/start"
+                app:backgroundTint="#3ACF40" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_time_timer_button"
@@ -193,7 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:layout_weight="1.5"
-                android:text="@android:string/cancel" />
+                android:text="@android:string/cancel"
+                app:backgroundTint="#CCCCCC" />
 
 
             <com.google.android.material.button.MaterialButton
@@ -204,7 +208,8 @@
                 android:layout_weight="1.5"
                 android:insetTop="6dp"
                 android:insetBottom="6dp"
-                android:text="pause" />
+                android:text="pause"
+                app:backgroundTint="#F44336" />
 
         </LinearLayout>
 

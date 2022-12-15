@@ -26,7 +26,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="Lap"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/header_elapsed"
@@ -38,7 +39,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="Lap time"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/header_time"
@@ -50,7 +52,8 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="Total time"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!--        <TextView-->
         <!--            android:id="@+id/textView"-->

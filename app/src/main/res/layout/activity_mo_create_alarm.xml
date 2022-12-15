@@ -30,11 +30,13 @@
                 android:layout_gravity="center"
                 android:layout_weight="0"
                 android:foregroundGravity="center"
+                android:headerBackground="#696969"
+                android:numbersSelectorColor="#818181"
                 android:timePickerMode="clock"
+                app:layout_constraintBottom_toTopOf="@id/card_root_chooseDate"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/card_root_chooseDate"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_root_chooseDate"
@@ -324,6 +326,7 @@
             android:insetTop="6dp"
             android:insetBottom="6dp"
             android:text="Cancel"
+            android:textColor="#F44336"
             app:cornerRadius="@dimen/round_radius" />
 
         <com.google.android.material.button.MaterialButton

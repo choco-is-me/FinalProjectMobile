@@ -16,9 +16,13 @@
 
         android:contentDescription="@string/add_alarm"
         android:text="@string/add_alarm"
+        android:textColor="#FF9800"
+        android:textColorLink="#FF9800"
         android:visibility="visible"
+        app:iconTint="#FF9800"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="#FF9800" />
 </androidx.constraintlayout.widget.ConstraintLayout>

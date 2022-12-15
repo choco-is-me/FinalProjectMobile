@@ -33,6 +33,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
+                android:headerBackground="#818181"
+                android:numbersSelectorColor="#818181"
                 android:timePickerMode="clock" />
 
             <com.google.android.material.card.MaterialCardView
@@ -308,6 +310,7 @@
             android:insetTop="6dp"
             android:insetBottom="6dp"
             android:text="Cancel"
+            android:textColor="#F44336"
             app:cornerRadius="@dimen/round_radius" />
 
         <com.google.android.material.button.MaterialButton
