@@ -156,10 +156,9 @@ public class MoAnimation {
         }
     }
 
-
+    //clear log
     public static void clearLog(){
         log.clear();
     }
-
 
 }
