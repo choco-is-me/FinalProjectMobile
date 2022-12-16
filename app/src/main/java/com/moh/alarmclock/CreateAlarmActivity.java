@@ -24,8 +24,8 @@ import com.moh.alarmclock.Clock.AlarmClockManager;
 import com.moh.alarmclock.Clock.Repeating;
 import com.moh.alarmclock.Clock.Snooze.Snooze;
 import com.moh.alarmclock.Date.Date;
-import com.moh.alarmclock.MoVibration.Vibration;
-import com.moh.alarmclock.MoVibration.VibrationTypes;
+import com.moh.alarmclock.Vibration.Vibration;
+import com.moh.alarmclock.Vibration.VibrationTypes;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +58,7 @@ public class CreateAlarmActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_create_alarm);
+        setContentView(R.layout.activity_create_alarm);
 
         init();
         setListeners();

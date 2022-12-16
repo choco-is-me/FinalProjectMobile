@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class Color {
 
 
-    // day and night values
     public static int[] color_text_on_highlight =
-            new int[]{android.graphics.Color.parseColor("#4caf50"), android.graphics.Color.parseColor("#a7ffeb")};
+            new int[]{android.graphics.Color.parseColor("#FF9800"), android.graphics.Color.parseColor("#FF9800")};
 
     public static int[] color_text_disabled =
             new int[]{android.graphics.Color.parseColor("#F28E8E8E"), android.graphics.Color.parseColor("#F28E8E8E")};

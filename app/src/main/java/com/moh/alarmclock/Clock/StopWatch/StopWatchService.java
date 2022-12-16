@@ -1,4 +1,4 @@
-package com.moh.alarmclock.Clock.MoStopWatch;
+package com.moh.alarmclock.Clock.StopWatch;
 
 import android.app.Notification;
 import android.app.NotificationManager;

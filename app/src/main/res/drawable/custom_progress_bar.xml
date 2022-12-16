@@ -15,10 +15,10 @@
 
 
                 <gradient
-                    android:centerColor="@color/colorPrimary_DarkMode"
+                    android:centerColor="@color/colorPrimary"
                     android:gradientRadius="2"
-                    android:endColor="@color/colorAccent_DarkMode"
-                    android:startColor="@color/colorAccent_DarkMode"
+                    android:endColor="@color/colorAccent"
+                    android:startColor="@color/colorAccent"
                     android:type="sweep" />
             </shape>
         </rotate>

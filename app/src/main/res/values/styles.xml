@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/MoBlack</item>
+        <item name="android:textColor">#E9222427</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -14,25 +14,25 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
-        <item name="imageButtonStyle">@style/MoImageButton_Style_Light</item>
+        <item name="materialCardViewStyle">@style/CardView.AclockStyle</item>
+        <item name="imageButtonStyle">@style/ImageButton_Style_Light</item>
     </style>
 
-    <style name="MoImageButton_Style_Light" parent="Widget.AppCompat.ImageButton">
+    <style name="ImageButton_Style_Light" parent="Widget.AppCompat.ImageButton">
         <item name="android:tint">@color/MoBlack</item>
     </style>
 
-    <style name="CardView.MoclockStyle" parent="Widget.MaterialComponents.CardView">
+    <style name="CardView.AclockStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">4dp</item>
     </style>
 
     <style name="MoBottomNavigationStyleLight" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="android:background">@color/MoWhite</item>
+        <item name="android:background">@android:color/white</item>
     </style>
 
 
     <style name="MoButtonStyle_Light" parent="Widget.AppCompat.Button">
-        <item name="android:backgroundTint">@color/MoWhite</item>
+        <item name="android:backgroundTint">@android:color/white</item>
     </style>
 
     <style name="MoTitleTextStyle" parent="TextAppearance.AppCompat">

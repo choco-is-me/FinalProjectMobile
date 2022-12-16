@@ -1,4 +1,4 @@
-package com.moh.alarmclock.Clock.MoStopWatch;
+package com.moh.alarmclock.Clock.StopWatch;
 
 import java.util.ArrayList;
 import java.util.List;

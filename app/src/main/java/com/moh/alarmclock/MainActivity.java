@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.moh.alarmclock.Animation.Animation;
 import com.moh.alarmclock.Clock.AlarmClockManager;
-import com.moh.alarmclock.Clock.MoStopWatch.StopWatch;
+import com.moh.alarmclock.Clock.StopWatch.StopWatch;
 import com.moh.alarmclock.Clock.Timer.Timer;
 import com.moh.alarmclock.Clock.Timer.TimerPresetPackage.TimerPreset;
 import com.moh.alarmclock.Section.SectionManager;

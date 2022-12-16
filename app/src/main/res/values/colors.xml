@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#F8BD67</color>
+    <color name="colorPrimaryDark">#FF9800</color>
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="colorAccent10">#423420</color>
-
-
-    <color name="colorPrimary_DarkMode">#E8BE7F</color>
-    <color name="colorPrimaryDark_DarkMode">#BF8B7A</color>
-    <color name="colorAccent_DarkMode">#77483A</color>
 
     <color name="setting_toolbar_background">@android:color/white</color>
 
@@ -19,7 +14,7 @@
     <color name="error_color">#E24444</color>
     <color name="error_color10">#19E24444</color>
 
-    <color name="snack_bar_text">#FFFFFF</color>
+    <color name="snack_bar_text">@android:color/white</color>
 
     <color name="textTimeColor">#575757</color>
 

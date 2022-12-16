@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColor">@color/MoBlack</item>
+        <item name="android:textColor">#E9232527</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
         <item name="android:statusBarColor">@android:color/white</item>
@@ -18,7 +18,7 @@
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
-        <item name="imageButtonStyle">@style/MoImageButton_Style_Light</item>
+        <item name="materialCardViewStyle">@style/CardView.AclockStyle</item>
+        <item name="imageButtonStyle">@style/ImageButton_Style_Light</item>
     </style>
 </resources>

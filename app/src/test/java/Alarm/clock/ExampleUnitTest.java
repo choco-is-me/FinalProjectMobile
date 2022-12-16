@@ -1,4 +1,4 @@
-package Mo.clock;
+package Alarm.clock;
 
 import static org.junit.Assert.assertEquals;
 

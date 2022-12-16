@@ -6,7 +6,7 @@
     <color name="colorAccent">#FFC0A7</color>
     <color name="colorAccent10">#1AFFC3A7</color>
 
-    <color name="divider_color">@color/colorPrimary_DarkMode</color>
+    <color name="divider_color">@color/colorPrimary</color>
 
     <color name="error_color">#cf6679</color>
     <color name="error_color10">#1ACF6679</color>
@@ -17,18 +17,15 @@
 
     <color name="preset_selected_color">#B7C55F40</color>
 
-    <color name="color_text_enabled">@color/colorPrimary_DarkMode</color>
-    <color name="color_text_disabled">#FFFFFF</color>
-    <color name="preset_glow_effect">#FFFFFF</color>
+    <color name="color_text_enabled">@color/colorPrimary</color>
+    <color name="color_text_disabled">@android:color/white</color>
 
-    <color name="notification_timer_background">@color/colorPrimary_DarkMode</color>
-    <color name="notification_stopwatch_background">@color/colorPrimary_DarkMode</color>
     <color name="notification_text_color">@android:color/black</color>
 
 
     <color name="selected_item_color">@color/colorPrimary</color>
     <color name="selected_item_color_overlay">#07892700</color>
 
-    <color name="textTimeColor">#FFFFFF</color>
+    <color name="textTimeColor">@android:color/white</color>
 
 </resources>

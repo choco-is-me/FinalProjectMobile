@@ -25,9 +25,7 @@ public class AlarmListView extends ArrayAdapter<AlarmClock> {
 
 
 
-    public AlarmListView(Context context, int resource,
-                         ArrayList<AlarmClock> objects,
-                         java.lang.Runnable r, java.lang.Runnable dmui, Runnable tsa, Runnable td, Runnable ct)
+    public AlarmListView(Context context, int resource, ArrayList<AlarmClock> objects, java.lang.Runnable r, java.lang.Runnable dmui, Runnable tsa, Runnable td, Runnable ct)
     {
         super(context, resource, objects);
         this.context = context;
@@ -45,14 +43,8 @@ public class AlarmListView extends ArrayAdapter<AlarmClock> {
         this.update.run();
     }
 
-    //called when rendering the list
     public View getView(final int position, final View convertView, ViewGroup parent) {
-
-        //get the property we are displaying
         final AlarmClock alarmClock = alarms.get(position);
-        //get the inflater and inflate the XML layout for each item
-        //final View view = conversation.getView(context);
-        // third element is whether they should show animation for delete mode or not
         return alarmClock.display(context,
                 this,
                 deleteAnimation
@@ -114,7 +106,6 @@ public class AlarmListView extends ArrayAdapter<AlarmClock> {
 
     private void showDelete(){
         if(AlarmClockManager.getInstance().getSelectedCount() > 0){
-            // show it
             turnDelete.run(true);
         }else{
             turnDelete.run(false);

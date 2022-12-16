@@ -18,7 +18,7 @@ import androidx.preference.PreferenceManager;
 
 import com.moh.alarmclock.Date.Date;
 import com.moh.alarmclock.Id.Id;
-import com.moh.alarmclock.MoVibration.Vibration;
+import com.moh.alarmclock.Vibration.Vibration;
 import com.moh.alarmclock.Music.MusicPlayer;
 import com.moh.alarmclock.Music.Volume;
 import com.moh.alarmclock.Notification.NotificationChannel;

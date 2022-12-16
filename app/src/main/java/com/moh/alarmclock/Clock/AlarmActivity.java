@@ -39,7 +39,7 @@ public class AlarmActivity extends AppCompatActivity {
         activateWakeLocks();
         window();
 
-        setContentView(R.layout.activity_mo_alarm);
+        setContentView(R.layout.activity_alarm);
         backgroundAnimation();
         Button button = findViewById(R.id.stop_alarm_button);
         button.setOnClickListener(v -> stopAlarm());

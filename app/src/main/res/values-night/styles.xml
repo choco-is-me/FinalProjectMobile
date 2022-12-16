@@ -3,19 +3,19 @@
 
 
     <style name= "AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary_DarkMode</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark_DarkMode</item>
-        <item name="colorAccent">@color/colorAccent_DarkMode</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/MaterialDark</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="imageButtonStyle">@style/MoImageButton_Style_Dark</item>
+        <item name="imageButtonStyle">@style/ImageButton_Style_Dark</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
         <item name="android:statusBarColor">@color/MaterialDark</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActivityTransitions">true</item>
 
-        <item name="materialCardViewStyle">@style/CardView.MoclockStyle</item>
+        <item name="materialCardViewStyle">@style/CardView.AclockStyle</item>
     </style>
 
 
@@ -24,11 +24,11 @@
         <item name="cardElevation">@dimen/card_elevation_night</item>
     </style>
 
-    <style name="MoImageButton_Style_Dark" parent="Widget.AppCompat.ImageButton">
-        <item name="android:tint">@color/MoWhite_v3</item>
+    <style name="ImageButton_Style_Dark" parent="Widget.AppCompat.ImageButton">
+        <item name="android:tint">@android:color/white</item>
     </style>
 
-    <style name="CardView.MoclockStyle" parent="Widget.MaterialComponents.CardView">
+    <style name="CardView.AclockStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">5dp</item>
     </style>
 

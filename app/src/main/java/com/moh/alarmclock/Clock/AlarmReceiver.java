@@ -22,31 +22,12 @@ public class AlarmReceiver extends BroadcastReceiver {
         try {
             AlarmClockManager.getInstance().cancelAlarm(id,context);
         } catch (EmptyAlarmException e) {
-            // we don't want it to ring if there is no alarm with such id
-            // make notification
             return;
         }
-
-        //AlarmWakeLock.acquireCpuWakeLock(context,1000000);
-        // activate the alarm (ring service)
         try {
             InitAlarmSession.startAlarm(context,id);
         } catch (EmptyAlarmException e) {
-            //e.printStackTrace();
         }
-
-//        createNotificationChannel(context);
-//        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-//                .setSmallIcon(R.drawable.ic_access_alarms_black_24dp)
-//                .setContentTitle("missed alarm")
-//                .setContentText("alarm rang but there was no matching id (so it did not give you sound)")
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                        .bigText("Much longer text that cannot fit one line..."))
-//                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-//        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-//
-//        // notificationId is a unique int for each notification that you must define
-//        notificationManager.notify(12, builder.build());
 
     }
 

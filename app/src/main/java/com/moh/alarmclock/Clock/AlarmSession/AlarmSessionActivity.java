@@ -34,7 +34,7 @@ public class AlarmSessionActivity extends AppCompatActivity implements GestureDe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mo_alarm_session);
+        setContentView(R.layout.activity_alarm_session);
         getWindow().addFlags(
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_FULLSCREEN|

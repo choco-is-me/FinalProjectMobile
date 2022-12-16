@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.moh.alarmclock.Clock.MoStopWatch.StopWatch;
-import com.moh.alarmclock.Clock.MoStopWatch.StopWatchRecyclerAdapter;
+import com.moh.alarmclock.Clock.StopWatch.StopWatch;
+import com.moh.alarmclock.Clock.StopWatch.StopWatchRecyclerAdapter;
 import com.moh.alarmclock.Section.SectionManager;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerUtils;
 import com.moofficial.moessentials.MoEssentials.MoUI.MoRecyclerView.MoRecyclerView;

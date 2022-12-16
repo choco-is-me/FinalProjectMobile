@@ -1,4 +1,4 @@
-package com.moh.alarmclock.MoVibration;
+package com.moh.alarmclock.Vibration;
 
 import android.content.Context;
 import android.os.Build;
@@ -36,7 +36,6 @@ public class Vibration implements MoLoadable {
             long[] timing = new long[]{1000,1500,1000};
             v.vibrate(VibrationEffect.createWaveform(timing, 1));
         } else {
-            //deprecated in API 26
             v.vibrate(milli);
         }
     }
@@ -49,7 +48,6 @@ public class Vibration implements MoLoadable {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createOneShot(milli, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
-            //deprecated in API 26
             v.vibrate(milli);
         }
     }
@@ -60,10 +58,6 @@ public class Vibration implements MoLoadable {
         }
     }
 
-    /**
-     * cancels the vibration if b is true
-     * @param b
-     */
     public static void mute(Context c,boolean b,long milli){
         if(b){
             cancel();
@@ -95,17 +89,9 @@ public class Vibration implements MoLoadable {
         return MoFile.getData(this.type,this.isActive);
     }
 
-
-    /**
-     * loads a savable object into its class
-     *
-     * @param data
-     * @param context
-     */
     @Override
     public void load(String data, Context context) {
         String[] comps = MoFile.loadable(data);
         this.isActive = Boolean.parseBoolean(comps[1]);
-        /// change type to integer
     }
 }

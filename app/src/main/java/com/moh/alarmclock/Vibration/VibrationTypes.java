@@ -1,4 +1,4 @@
-package com.moh.alarmclock.MoVibration;
+package com.moh.alarmclock.Vibration;
 
 public enum VibrationTypes {
 
